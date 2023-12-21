@@ -20,7 +20,7 @@
 
 </div>
 
-<img height="200px" src="https://github.com/Kokomichrzan/Kokomichrzan-Repo-Template/blob/Info/Assets/Thanks.gif">
+<img height="200px" src="https://github.com/Kokomichrzan/CPP-Data/blob/Info/Assets/Thanks.gif">
 
 # Contributors
 
@@ -37,15 +37,15 @@
   </td>
 </table>
 
-## Main Contributors
+<!-- ## Main Contributors
 
 <table>
   <td align=center>
     none
   </td>
-</table>
+</table> -->
 
-## Contributors Who Helped With Project
+<!-- ## Contributors Who Helped With Project -->
 
 
 </div>
