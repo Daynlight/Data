@@ -10,21 +10,12 @@ This is simple Save/Load Data for C++. You Can you use it for free and if you fi
 2. Create Class <br>
 <code>Data [ClassName] = Data([Size], [Name], [Path]);</code><br>
 3. Get Data <br>
-<code>
-Data.Content[[Element]];
-</code><br>
+<code>Data.Content[[Element]];</code><br>
 4. Add Data<br>
-<code>
-Data.Add([Slot], [Data]);
-</code><br>
+<code>Data.Add([Slot], [Data]);</code><br>
 5. Add Data<br>
-<code>
-Data.Save();
-</code><br>
-6. Check if File is not Empty<br>
-<code>
-Data.Exist();
-</code>
+<code>Data.Save();</code><br>
+6. Check if File is not Empty<br><code>Data.Exist();</code>
 
 <h2>✨Contributors✨</h2>
 <table align=center>
