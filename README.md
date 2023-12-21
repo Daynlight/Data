@@ -38,6 +38,9 @@ This is simple Save/Load Data for C++. You Can you use it for free and if you fi
 * Save Data.
 * Check if File is not empty.
 
+</div>
+<div align=center>
+
 <img height=200px src="https://github.com/Kokomichrzan/CPP-Data/blob/Info/Assets/Features.gif">
 
 </div>
