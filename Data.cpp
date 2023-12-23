@@ -4,7 +4,7 @@
 
 namespace Data
 {
-    Array::Array(const std::string FilePath, const int FileSize)
+    Array::Array(const std::filesystem::path FilePath, const int FileSize)
     {
         //Set Size
         Size = FileSize;
@@ -83,7 +83,7 @@ namespace Data
 
     //############################################## Vector ##############################################//
 
-    Vector::Vector(const std::string FilePath, const int FileSize)
+    Vector::Vector(const std::filesystem::path FilePath, const int FileSize)
     {
         //Set Size
         Content.reserve(FileSize);
