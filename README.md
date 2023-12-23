@@ -65,9 +65,15 @@ Vector:<br>
 </div>
 <div align=left>
 
-* Load Data.
-* Add Data.
-* Save Data.
+* List All Files in Dir.
+* Vectors.
+* Arrays.
+* Remove File.
+* Create Dir.
+* Create File.
+* Load Data From File.
+* Add Data To Varible.
+* Save Data to FIle.
 * Check if File is not empty.
 
 </div>
