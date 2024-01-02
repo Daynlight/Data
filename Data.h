@@ -10,7 +10,11 @@ namespace Data
     //############################################## Array Format ##############################################//
     class Array {
     public:
-        std::string* Content;
+        union{
+            std::string* Content;
+            char* Bin;
+        };
+
         std::filesystem::path Path;
         int Size = 0;
 
@@ -19,6 +23,7 @@ namespace Data
         std::vector<std::filesystem::path> List();
         void Read(const std::string FileName);
         void Save(const std::string FileName);
+        void SaveBin(const std::string FileName);
         void Remove(const std::string FileName);
         bool Exist(const std::string FileName);
         ~Array();
