@@ -19,7 +19,7 @@ namespace Data
         int Size = 0;
 
     public:
-        Array(const std::filesystem::path FilePath = "Data", const int FileSize = 0);
+        Array(const std::filesystem::path FilePath = "Data/", const int FileSize = 0);
         std::vector<std::filesystem::path> List();
         void Read(const std::string FileName);
         void Save(const std::string FileName);
@@ -37,7 +37,7 @@ namespace Data
         std::filesystem::path Path;
 
     public:
-        Vector(const std::filesystem::path FilePath = "Data", const int FileSize = 0);
+        Vector(const std::filesystem::path FilePath = "Data/", const int FileSize = 0);
         std::vector<std::filesystem::path> List();
         void Read(const std::string FileName);
         void Save(const std::string FileName);
