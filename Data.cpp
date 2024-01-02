@@ -1,5 +1,4 @@
 #include "Data.h"
-#include "iostream"
 
 //############################################## Data ##############################################//
 
@@ -10,7 +9,6 @@ namespace Data
         //Set Size
         Size = FileSize;
         Content = new std::string[Size];
-        Bin[sizeof(Content)];
 
         //Create File Paths
         Path = std::filesystem::current_path() / FilePath / "";
@@ -63,15 +61,6 @@ namespace Data
         FileData << Temp;
         FileData.close();
 
-    }
-
-    void Array::SaveBin(const std::string FileName){
-        std::string Temp;
-        for(const char Line : Bin){
-            Temp += Line + "\n";
-        }
-        Temp+="\0";
-        cou
     }
 
     void Array::Remove(const std::string FileName){
