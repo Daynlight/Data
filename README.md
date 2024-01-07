@@ -1,5 +1,5 @@
 <div align=center>
-  <img width=100% src="https://github.com/Kokomichrzan/CPP-Data/blob/Info/Assets/Background.gif">
+  <img width=100% src="https://github.com/Kokomichrzan/CPP-Data/blob/Docs/Assets/Background.gif">
 <h1>🔥Data Save And Load To File Easy Lib🔥</h1>
 
 <h2>🌐About🌐</h2>
@@ -79,6 +79,6 @@ Vector:<br>
 </div>
 <div align=center>
 
-<img height=200px src="https://github.com/Kokomichrzan/CPP-Data/blob/Info/Assets/Features.gif">
+<img height=200px src="https://github.com/Kokomichrzan/CPP-Data/blob/Docs/Assets/Features.gif">
 
 </div>

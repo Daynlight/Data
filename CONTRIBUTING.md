@@ -20,7 +20,7 @@
 
 </div>
 
-<img height="200px" src="https://github.com/Kokomichrzan/CPP-Data/blob/Info/Assets/Thanks.gif">
+<img height="200px" src="https://github.com/Kokomichrzan/CPP-Data/blob/Docs/Assets/Thanks.gif">
 
 # Contributors
 
