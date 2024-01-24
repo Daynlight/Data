@@ -78,8 +78,4 @@ Vector:<br>
 * Manage Conetent Data.
 * Check if File is empty.
 * Check if Files are change.
-
-</div>
-<div align=center>
-
 </div>
