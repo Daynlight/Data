@@ -3,63 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>C++ Data Lib</title>
+    <title>C++ Data</title>
     <link rel="stylesheet" href="index.css">
     <link rel="shortcut icon" href="Icon.png" type="image/x-icon">
 </head>
 <body>
     <img src="https://github.com/Kokomichrzan/CPP-Data/blob/Info/Assets/Background.gif?raw=true" alt="header img">
-    <h1>This Is easy Data Manage c++ Lib</h1>
-    <p>This lib allow you to Load, Add and Save Data in File.</p>
-    <h2>License:</h2>
+    <h1>C++ Data LIB</h1>
+    <p>This lib allow you to easy Load, Manage and Save Data in File.</p>
+    <h2>Docs:</h2>
     <p>Lib is on Mit License you can do anythink what you want with this lib</p>
-    <a href="https://github.com/kokomichrzan/CPP-Data/blob/Info/LICENSE">Full License here</a>
+    <a href="https://github.com/kokomichrzan/CPP-Data/blob/Docs">Docs</a>
+    <a href="https://github.com/kokomichrzan/CPP-Data/blob/Docs/LICENSE">Full License here</a>
     <h2>Usage:</h2>
     <h3>
         1. Download And Include Header File<br>
         Array:<br>
         2.1 Create<br>
         <code>Data::Array [ClassName] = Data::Array({Path}, {Size});</code></br>
-        2.2 Get Files List in Dir</br>
-        <code>std::vector >std::filesystem< {Varible} = [ClassName].List();</code> </br>
-        2.2 Read Data From File in this dir to Array</br>
+        2.2 Update FilesList</br>
+        <code>[ClassName].UpdateList();</code> </br>
+        2.3 Get FilesList</br>
+        <code>[ClassName].FileList[{element}];</code> </br>
+        2.4 Read Data From File in this dir to Array</br>
         <code>[ClassName].Read({FileName});</code> </br>
-        2.3 Save Data from Array to File<br>
+        2.5 Save Data from Array to File<br>
         <code>[ClassName].Save({FileName});</code> </br>
-        2.4 Remove File<br>
+        2.6 Create File<br>
+        <code>[ClassName].Create({FileName});</code> </br>
+        2.7 Remove File<br>
         <code>[ClassName].Remove({FileName});</code> </br>
-        2.5 Check if Exist<br>
-        <code>[ClassName].Exist({FileName});</code> </br>
-        2.6 Get Data from Array<br>
-        <code>std::string [Var] = [ClassName].Content[{Slot}]</code> </br>
-        2.7 Add Data to Array<br>
-        <code>[ClassName].Content[{Slot}] = {Data}</code> </br>
-        2.8 Check if files change in dir <br>
-        <code>[ClassName].Check();</code> </br></br>
-        
+        2.8 Check if IsEmpty<br>
+        <code>[ClassName].IsEmpty({FileName});</code> </br>
+        2.9 Check if files was changed in Dir <br>
+        <code>[ClassName].Check();</code> </br>
+        2.10 Acces to Data Array<br>
+        <code>[ClassName].Content</code></br>
+        </br>
         Vector:<br>
-        3.1 Create<br>
+        2.1 Create<br>
         <code>Data::Vector [ClassName] = Data::Vector({Path}, {Size});</code></br>
-        3.2 Get Files List in Dir</br>
-        <code>std::vector >std::filesystem< {Varible} = [ClassName].List();</code> </br>
-        3.2 Read Data From File in this dir to Array</br>
+        2.2 Update FilesList</br>
+        <code>[ClassName].UpdateList();</code> </br>
+        2.3 Get FilesList</br>
+        <code>[ClassName].FileList[{element}];</code> </br>
+        2.4 Read Data From File in this dir to Array</br>
         <code>[ClassName].Read({FileName});</code> </br>
-        3.3 Save Data from Array to File<br>
+        2.5 Save Data from Array to File<br>
         <code>[ClassName].Save({FileName});</code> </br>
-        3.4 Remove File<br>
+        2.6 Create File<br>
+        <code>[ClassName].Create({FileName});</code> </br>
+        2.7 Remove File<br>
         <code>[ClassName].Remove({FileName});</code> </br>
-        3.5 Check if Exist<br>
-        <code>[ClassName].Exist({FileName});</code> </br>
-        3.6 Get Data from Array<br>
-        <code>std::string [Var] = [ClassName].Get[{Slot}];</code> </br>
-        3.7 Add Data to Array<br>
-        <code>[ClassName].Add({Data});</code> </br>
-        3.8 Change Data in Array<br>
-        <code>[ClassName].Change({Slot}, {Data});</code> </br>
-        3.9 Clear Data in Array<br>
-        <code>[ClassName].Clear();</code> </br>
-        3.10 Check if files change in dir <br>
-        <code>[ClassName].Check();</code></br>
+        2.8 Check if IsEmpty<br>
+        <code>[ClassName].IsEmpty({FileName});</code> </br>
+        2.9 Check if files was changed in Dir <br>
+        <code>[ClassName].Check();</code> </br>
+        2.10 Acces to Data Vector<br>
+        <code>[ClassName].Content</code></br>
+
+        <p><a href="https://github.com/kokomichrzan/CPP-Data/tree/Dev">Form More Info Check Dev Branch</a></p>
+
     </h3>
     <h2>Download:</h2>
     <p>You Can Download This Lib in cpp and header format from here<br>
