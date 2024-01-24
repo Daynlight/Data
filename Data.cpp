@@ -19,6 +19,13 @@ namespace Data
             FileList.push_back(element.path());
     };
 
+    bool Array::FolderChange()
+    {
+        std::vector<std::filesystem::path> Last = FileList;
+        UpdateList();
+        return (Last != FileList);
+    };
+
     void Array::Read(const std::string& FileName) {
         Create(FileName);
 
@@ -56,13 +63,13 @@ namespace Data
         std::filesystem::remove(Path / FileName);
     };
 
-    bool Array::Exist(const std::string& FileName) {
+    bool Array::IsEmpty(const std::string FileName) {
         std::fstream FileData(Path / FileName, std::ios::in);
         std::string Check;
         FileData >> Check;
         FileData.close();
-        if (Check == "") return false;
-        return true;
+        if (Check == "") return true;
+        return false;
     };
 
     //############################################## Vector ##############################################//
@@ -81,6 +88,13 @@ namespace Data
         FileList.clear();
         for (const std::filesystem::directory_entry& element : std::filesystem::directory_iterator(Path))  
         FileList.push_back(element.path());
+    }
+
+    bool Vector::FolderChange()
+    {
+        std::vector<std::filesystem::path> Last = FileList;
+        UpdateList();
+        return (Last != FileList);
     };
 
     void Vector::Read(const std::string& FileName) {
@@ -120,12 +134,12 @@ namespace Data
         std::filesystem::remove(Path / FileName); 
     };
 
-    bool Vector::Exist(const std::string& FileName) {
+    bool Vector::IsEmpty(const std::string FileName) {
         std::fstream FileData(Path / FileName, std::ios::in);
         std::string Check;
         FileData >> Check;
         FileData.close();
-        if (Check == "") return false;
-        return true;
+        if (Check == "") return true;
+        return false;
     };
 };

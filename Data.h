@@ -10,11 +10,12 @@ namespace Data
         Array(const std::filesystem::path Path = "Data", const int Szie = 0);
         ~Array();
         void UpdateList();
+        bool FolderChange();
         void Read(const std::string& FileName);
         void Save(const std::string& FileName);
         void Create(const std::string& FileName);
         void Remove(const std::string& FileName);
-        bool Exist(const std::string& FileName);
+        bool IsEmpty(const std::string FileName);
 
         std::string* Content;
         std::filesystem::path Path;
@@ -26,11 +27,12 @@ namespace Data
     public:
         Vector(const std::filesystem::path FilePath = "Data", const int FileSize = 0);
         void UpdateList();
+        bool FolderChange();
         void Read(const std::string& FileName);
         void Save(const std::string& FileName);
         void Create(const std::string& FileName);
         void Remove(const std::string& FileName);
-        bool Exist(const std::string& FileName);
+        bool IsEmpty(const std::string FileName);
 
         std::vector<std::string> Content;
         std::filesystem::path Path;
