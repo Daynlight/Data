@@ -24,6 +24,8 @@ Array:<br>
 <code>std::string [Var] = [ClassName].Content[{Slot}]</code> </br>
 2.7 Add Data to Array<br>
 <code>[ClassName].Content[{Slot}] = {Data}</code> </br>
+2.8 Check if files change in dir <br>
+<code>[ClassName].Check();</code> </br>
 
 Vector:<br>
 3.1 Create<br>
@@ -46,6 +48,8 @@ Vector:<br>
 <code>[ClassName].Change({Slot}, {Data});</code> </br>
 3.9 Clear Data in Array<br>
 <code>[ClassName].Clear();</code> </br>
+3.10 Check if files change in dir <br>
+<code>[ClassName].Check();</code></br>
 
 
 
@@ -75,6 +79,7 @@ Vector:<br>
 * Add Data To Varible.
 * Save Data to FIle.
 * Check if File is not empty.
+* Check if Files are change.
 
 </div>
 <div align=center>
