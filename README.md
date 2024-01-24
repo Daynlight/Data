@@ -10,48 +10,46 @@ This is simple Save/Load Data for C++. You Can you use it for free and if you fi
 Array:<br>
 2.1 Create<br>
 <code>Data::Array [ClassName] = Data::Array({Path}, {Size});</code></br>
-2.2 Get Files List in Dir</br>
-<code>std::vector >std::filesystem< {Varible} = [ClassName].List();</code> </br>
-2.2 Read Data From File in this dir to Array</br>
+2.2 Update FilesList</br>
+<code>[ClassName].UpdateList();</code> </br>
+2.3 Get FilesList</br>
+<code>[ClassName].FileList[{element}];</code> </br>
+2.4 Read Data From File in this dir to Array</br>
 <code>[ClassName].Read({FileName});</code> </br>
-2.3 Save Data from Array to File<br>
+2.5 Save Data from Array to File<br>
 <code>[ClassName].Save({FileName});</code> </br>
-2.4 Remove File<br>
+2.6 Create File<br>
+<code>[ClassName].Create({FileName});</code> </br>
+2.7 Remove File<br>
 <code>[ClassName].Remove({FileName});</code> </br>
-2.5 Check if Exist<br>
-<code>[ClassName].Exist({FileName});</code> </br>
-2.6 Get Data from Array<br>
-<code>std::string [Var] = [ClassName].Content[{Slot}]</code> </br>
-2.7 Add Data to Array<br>
-<code>[ClassName].Content[{Slot}] = {Data}</code> </br>
-2.8 Check if files change in dir <br>
+2.8 Check if IsEmpty<br>
+<code>[ClassName].IsEmpty({FileName});</code> </br>
+2.9 Check if files was changed in Dir <br>
 <code>[ClassName].Check();</code> </br>
+2.10 Acces to Data Array<br>
+<code>[ClassName].Content</code></br>
 
 Vector:<br>
-3.1 Create<br>
+2.1 Create<br>
 <code>Data::Vector [ClassName] = Data::Vector({Path}, {Size});</code></br>
-3.2 Get Files List in Dir</br>
-<code>std::vector >std::filesystem< {Varible} = [ClassName].List();</code> </br>
-3.2 Read Data From File in this dir to Array</br>
+2.2 Update FilesList</br>
+<code>[ClassName].UpdateList();</code> </br>
+2.3 Get FilesList</br>
+<code>[ClassName].FileList[{element}];</code> </br>
+2.4 Read Data From File in this dir to Array</br>
 <code>[ClassName].Read({FileName});</code> </br>
-3.3 Save Data from Array to File<br>
+2.5 Save Data from Array to File<br>
 <code>[ClassName].Save({FileName});</code> </br>
-3.4 Remove File<br>
+2.6 Create File<br>
+<code>[ClassName].Create({FileName});</code> </br>
+2.7 Remove File<br>
 <code>[ClassName].Remove({FileName});</code> </br>
-3.5 Check if Exist<br>
-<code>[ClassName].Exist({FileName});</code> </br>
-3.6 Get Data from Array<br>
-<code>std::string [Var] = [ClassName].Get[{Slot}];</code> </br>
-3.7 Add Data to Array<br>
-<code>[ClassName].Add({Data});</code> </br>
-3.8 Change Data in Array<br>
-<code>[ClassName].Change({Slot}, {Data});</code> </br>
-3.9 Clear Data in Array<br>
-<code>[ClassName].Clear();</code> </br>
-3.10 Check if files change in dir <br>
-<code>[ClassName].Check();</code></br>
-
-
+2.8 Check if IsEmpty<br>
+<code>[ClassName].IsEmpty({FileName});</code> </br>
+2.9 Check if files was changed in Dir <br>
+<code>[ClassName].Check();</code> </br>
+2.10 Acces to Data Vector<br>
+<code>[ClassName].Content</code></br>
 
 <h2>✨Contributors✨</h2>
 <table align=center>
@@ -69,16 +67,16 @@ Vector:<br>
 </div>
 <div align=left>
 
-* List All Files in Dir.
 * Vectors.
 * Arrays.
+* List All Files in Dir.
 * Remove File.
-* Create Dir.
 * Create File.
+* Create Dir.
 * Load Data From File.
-* Add Data To Varible.
-* Save Data to FIle.
-* Check if File is not empty.
+* Save Data to File.
+* Manage Conetent Data.
+* Check if File is empty.
 * Check if Files are change.
 
 </div>
