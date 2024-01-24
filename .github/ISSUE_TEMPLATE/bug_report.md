@@ -16,5 +16,4 @@ assignees: Kokomichrzan
 ## Screen</br>
 
 Thanks <3</br>
-<img height=50px src="https://github.com/Kokomichrzan/CPP-Data/blob/Docs/Assets/Thanks.gif"></img>
 </div>

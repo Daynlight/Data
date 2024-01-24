@@ -1,9 +1,9 @@
 <div align=center>
   <img width=100% src="https://github.com/Kokomichrzan/CPP-Data/blob/Docs/Assets/Background.gif">
-<h1>🔥Data Save And Load To File Easy Lib🔥</h1>
+<h1>🔥C++ Data Lib🔥</h1>
 
 <h2>🌐About🌐</h2>
-This is simple Save/Load Data for C++. You Can you use it for free and if you find any bug pls report it. Thanks <3
+This is Easy Lib for Saving, Loading, Managing Data and Files <3
 
 <h2>📃Usage📃</h2>
 1. Download And Include Header File<br>
@@ -81,7 +81,5 @@ Vector:<br>
 
 </div>
 <div align=center>
-
-<img height=200px src="https://github.com/Kokomichrzan/CPP-Data/blob/Docs/Assets/Features.gif">
 
 </div>
