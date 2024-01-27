@@ -61,7 +61,8 @@ namespace Data
                 Line += std::to_string(Data);
             }
             if (HashFunction && Content[Count] != "") Line = HashFunction(Line);
-            if (Count < Size - 1) Temp += Line + "\n";
+            Temp += Line;
+            if (Count < Size - 1) Temp += "\n";
         }
         Temp += "\0";
 
