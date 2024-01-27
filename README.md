@@ -15,9 +15,9 @@ Array:<br>
 2.3 Get FilesList</br>
 <code>[ClassName].FileList[{element}];</code> </br>
 2.4 Read Data From File in this dir to Array</br>
-<code>[ClassName].Read({FileName});</code> </br>
+<code>[ClassName].Read({FileName}, {UnHash function(optional) for line});</code> </br>
 2.5 Save Data from Array to File<br>
-<code>[ClassName].Save({FileName});</code> </br>
+<code>[ClassName].Save({FileName}, {Hash function(optional) for line});</code> </br>
 2.6 Create File<br>
 <code>[ClassName].Create({FileName});</code> </br>
 2.7 Remove File<br>
@@ -37,9 +37,9 @@ Vector:<br>
 2.3 Get FilesList</br>
 <code>[ClassName].FileList[{element}];</code> </br>
 2.4 Read Data From File in this dir to Array</br>
-<code>[ClassName].Read({FileName});</code> </br>
+<code>[ClassName].Read({FileName}, {UnHash function(optional) for line});</code> </br>
 2.5 Save Data from Array to File<br>
-<code>[ClassName].Save({FileName});</code> </br>
+<code>[ClassName].Save({FileName}, {Hash function(optional) for line});</code> </br>
 2.6 Create File<br>
 <code>[ClassName].Create({FileName});</code> </br>
 2.7 Remove File<br>
@@ -78,4 +78,6 @@ Vector:<br>
 * Manage Conetent Data.
 * Check if File is empty.
 * Check if Files are change.
+* Custom Hash Function For Every Line
+* Save in dec Format
 </div>
