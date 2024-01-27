@@ -4,7 +4,7 @@ int main() {
 	TestArray ArrayTest = TestArray();
 	TestVector VerctorTest = TestVector();
 
-	ArrayTest.ShowAll();
+	ArrayTest.ReadFile();
 
 	return 0;
 }
@@ -76,6 +76,7 @@ void TestArray::SaveFile()
 	std::cout << "\n------------ TestSave ------------\n";
 
 	Array.Content[0] = "Test";
+	Array.Content[2] = "Test2";
 	Array.Save("Test");
 
 	std::cout << "Saved to Test\n";
@@ -84,12 +85,28 @@ void TestArray::SaveFile()
 void TestArray::ReadFile()
 {
 	std::cout << "\n------------ TestRead ------------\n";
+	PrintData();
 
-	Array.Content->clear();
+	Array.Content[0] = "Test";
+	Array.Content[2] = "Test2";
+	Array.Content[5] = "£";
+	std::cout << "£";
+	Array.Save("Test");
+	PrintData();
+	std::cout << "Saved\n";
+
+	for (size_t i = 0; i < Array.Size; i++)
+	{
+		Array.Content[i] = "";
+	}
+
+	std::cout << "Cleared\n";
+	PrintData();
+
 	Array.Read("Test");
 
 	std::cout << "Readed from Test\n";
-	std::cout << "Data " << Array.Content[0];
+	PrintData();
 }
 
 void TestArray::FolderChange()

@@ -33,7 +33,12 @@ namespace Data
         std::string Line;
         for (int Count = 0; Count < Size; Count++) {
             std::getline(FileData, Line);
-            Content[Count] = Line;
+            if(Line != "")
+            for (size_t j = 0; j < Line.size(); j = j + 3)
+            {
+                uint8_t Num = std::stoul(Line.substr(j, 3));
+                Content[Count] += Num;
+            }
         }
         FileData.close();
     };
@@ -43,7 +48,14 @@ namespace Data
 
         std::string Temp;
         for (int Count = 0; Count < Size; Count++) {
-            Temp += Content[Count] + "\n";
+            for (size_t j = 0; j < Content[Count].size(); j++)
+            {
+                uint8_t Data = Content[Count][j];
+                if (Data < 100) Temp += "0";
+                if (Data < 10) Temp += "0";
+                Temp += std::to_string(Data);
+            }
+            Temp += "\n";
         }
         Temp += "\0";
 

@@ -16,4 +16,3 @@ project "Test"
     filter "configurations:Test"
         defines { "Test" }  
         symbols "On"
-        optimize "On" 
