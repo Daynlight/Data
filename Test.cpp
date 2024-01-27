@@ -4,7 +4,7 @@ int main() {
 	TestArray ArrayTest = TestArray();
 	TestVector VerctorTest = TestVector();
 
-	ArrayTest.ReadFile();
+	VerctorTest.ReadFile();
 
 	return 0;
 }
@@ -214,15 +214,26 @@ void TestVector::SaveFile()
 void TestVector::ReadFile()
 {
 	std::cout << "\n------------ TestRead ------------\n";
+	PrintData();
 
-	Vector.Content.emplace_back("Data");
+	Vector.Content.emplace_back("Test");
+	Vector.Content.emplace_back("Test2");
+	Vector.Content.emplace_back("£");
+	std::cout << "£";
 	Vector.Save("Test");
+	PrintData();
+	std::cout << "Saved\n";
 
 	Vector.Content.clear();
+	
+
+	std::cout << "Cleared\n";
+	PrintData();
+
 	Vector.Read("Test");
 
 	std::cout << "Readed from Test\n";
-	std::cout << "Data " << Vector.Content[0];
+	PrintData();
 }
 
 void TestVector::FolderChange()

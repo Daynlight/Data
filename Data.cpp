@@ -55,7 +55,7 @@ namespace Data
                 if (Data < 10) Temp += "0";
                 Temp += std::to_string(Data);
             }
-            Temp += "\n";
+            if (Count < Size - 1) Temp += "\n";
         }
         Temp += "\0";
 
@@ -126,7 +126,14 @@ namespace Data
 
         std::string Temp;
         for (int Count = 0; Count < Content.size(); Count++) {
-            Temp += Content[Count] + "\n";
+            for (size_t j = 0; j < Content[Count].size(); j++)
+            {
+                uint8_t Data = Content[Count][j];
+                if (Data < 100) Temp += "0";
+                if (Data < 10) Temp += "0";
+                Temp += std::to_string(Data);
+            }
+            if(Count < Content.size() - 1) Temp += "\n";
         }
         Temp += "\0";
 
