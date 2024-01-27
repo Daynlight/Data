@@ -2,6 +2,7 @@
 #include "Data.h"
 #include <iostream>
 #include <filesystem>
+#include <string>
 
 class TestArray
 {
@@ -18,6 +19,7 @@ public:
 	void UpdateFilesList();
 	void ListFiles();
 	void GetSize();
+	void HashTest();
 
 private:
 	Data::Array Array = Data::Array("Test", 10);
@@ -39,6 +41,7 @@ public:
 	void UpdateFilesList();
 	void ListFiles();
 	void GetSize();
+	void HashTest();
 
 private:
 	Data::Vector Vector = Data::Vector("Test");

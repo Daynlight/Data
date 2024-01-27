@@ -2,6 +2,7 @@
 #include <fstream>
 #include <filesystem>
 #include <vector>
+#include <functional>
 
 namespace Data
 {
@@ -11,8 +12,8 @@ namespace Data
         ~Array();
         void UpdateList();
         bool FolderChange();
-        void Read(const std::string& FileName);
-        void Save(const std::string& FileName);
+        void Read(const std::string& FileName, std::function<std::string(std::string)> UnHashFunction = nullptr);
+        void Save(const std::string& FileName, std::function<std::string(std::string)> HashFunction = nullptr);
         void Create(const std::string& FileName);
         void Remove(const std::string& FileName);
         bool IsEmpty(const std::string FileName);
@@ -28,8 +29,8 @@ namespace Data
         Vector(const std::filesystem::path FilePath = "Data", const int FileSize = 0);
         void UpdateList();
         bool FolderChange();
-        void Read(const std::string& FileName);
-        void Save(const std::string& FileName);
+        void Read(const std::string& FileName, std::function<std::string(std::string)> UnHashFunction = nullptr);
+        void Save(const std::string& FileName, std::function<std::string(std::string)> HashFunction = nullptr);
         void Create(const std::string& FileName);
         void Remove(const std::string& FileName);
         bool IsEmpty(const std::string FileName);

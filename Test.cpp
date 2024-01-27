@@ -4,7 +4,8 @@ int main() {
 	TestArray ArrayTest = TestArray();
 	TestVector VerctorTest = TestVector();
 
-	VerctorTest.ReadFile();
+	VerctorTest.ShowAll();
+	ArrayTest.ShowAll();
 
 	return 0;
 }
@@ -21,6 +22,7 @@ void TestArray::ShowAll()
 	ManageData();
 	PrintData();
 	UpdateFilesList();
+	HashTest();
 }
 
 void TestVector::ShowAll()
@@ -35,6 +37,7 @@ void TestVector::ShowAll()
 	ManageData();
 	PrintData();
 	UpdateFilesList();
+	HashTest();
 }
 
 void TestArray::Exist()
@@ -165,6 +168,65 @@ void TestArray::GetSize()
 {
 	std::cout << "\n------------ GetSize ------------\n";
 	std::cout << "Size: " << Array.Size << "\n";
+}
+
+std::string Hash(std::string Data) {
+	for (size_t i = 0; i < Data.size(); i++)
+	{
+		Data[i] = Data[i] * 2;
+	}
+	return Data;
+}
+
+std::string UnHash(std::string Data) {
+	for (size_t i = 0; i < Data.size(); i++)
+	{
+		Data[i] = Data[i] / 2;
+	}
+	return Data;
+}
+
+void TestArray::HashTest()
+{
+	std::cout << "\n------------ Hash Test ------------\n";
+	Array.Content[0] = "Test";
+	Array.Content[4] = "Test2";
+	Array.Content[7] = "£";
+	std::cout << "\n------------ Data ------------\n";
+	PrintData();
+	Array.Save("TestHash", &Hash);
+	
+	for (size_t i = 0; i < Array.Size; i++)
+	Array.Content[i] = "";
+
+	std::cout << "\n------------ Cleared ------------\n";
+	PrintData();
+
+	std::cout << "\n------------ Cleared ------------\n";
+	Array.Read("TestHash", &UnHash);
+	PrintData();
+}
+
+void TestVector::HashTest()
+{
+	std::cout << "\n------------ Hash Test ------------\n";
+	Vector.Content.emplace_back("Test");
+	Vector.Content.emplace_back("Test2");
+	Vector.Content.emplace_back("£");
+
+	std::cout << "\n------------ Data ------------\n";
+	PrintData();
+	Vector.Save("TestHash", &Hash);
+
+	Vector.Content.clear();
+
+	std::cout << "\n------------ Cleared ------------\n";
+	PrintData();
+
+	std::cout << "\n------------ Cleared ------------\n";
+	Vector.Read("TestHash", &UnHash);
+	PrintData();
+
 }
 
 void TestVector::Exist()

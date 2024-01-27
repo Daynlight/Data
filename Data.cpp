@@ -26,36 +26,42 @@ namespace Data
         return (Last != FileList);
     };
 
-    void Array::Read(const std::string& FileName) {
+    void Array::Read(const std::string& FileName, std::function<std::string(std::string)> UnHashFunction) {
         Create(FileName);
 
         std::fstream FileData(Path / FileName, std::ios::in);
-        std::string Line;
+        std::string Line = "";
         for (int Count = 0; Count < Size; Count++) {
             std::getline(FileData, Line);
-            if(Line != "")
-            for (size_t j = 0; j < Line.size(); j = j + 3)
+            if (Line != "")
             {
-                uint8_t Num = std::stoul(Line.substr(j, 3));
-                Content[Count] += Num;
+                if (UnHashFunction) Line = UnHashFunction(Line);
+                for (size_t j = 0; j < Line.size(); j = j + 3)
+                {
+                    uint8_t Num = std::stoul(Line.substr(j, 3));
+                    Content[Count] += Num;
+                }
             }
         }
         FileData.close();
     };
 
-    void Array::Save(const std::string& FileName) {
+    void Array::Save(const std::string& FileName, std::function<std::string(std::string)> HashFunction) {
         Create(FileName);
 
-        std::string Temp;
+        std::string Temp = "";
+        std::string Line = "";
         for (int Count = 0; Count < Size; Count++) {
+            Line = "";
             for (size_t j = 0; j < Content[Count].size(); j++)
             {
                 uint8_t Data = Content[Count][j];
-                if (Data < 100) Temp += "0";
-                if (Data < 10) Temp += "0";
-                Temp += std::to_string(Data);
+                if (Data < 100) Line += "0";
+                if (Data < 10) Line += "0";
+                Line += std::to_string(Data);
             }
-            if (Count < Size - 1) Temp += "\n";
+            if (HashFunction && Content[Count] != "") Line = HashFunction(Line);
+            if (Count < Size - 1) Temp += Line + "\n";
         }
         Temp += "\0";
 
@@ -109,31 +115,46 @@ namespace Data
         return (Last != FileList);
     };
 
-    void Vector::Read(const std::string& FileName) {
+    void Vector::Read(const std::string& FileName, std::function<std::string(std::string)> UnHashFunction) {
         Create(FileName);
 
         std::fstream FileData(Path / FileName, std::ios::in);
-        std::string Line;
+        std::string Line = "";
+        std::string Temp = "";
         while (!FileData.eof()) {
+            Temp = "";
             std::getline(FileData, Line);
-            Content.emplace_back(Line);
+            if (Line != "")
+            {
+                if (UnHashFunction) Line = UnHashFunction(Line);
+                for (size_t j = 0; j < Line.size(); j = j + 3)
+                {
+                    uint8_t Num = std::stoul(Line.substr(j, 3));
+                    Temp += Num;
+                }
+                Content.emplace_back(Temp);
+            }
         }
         FileData.close();
     };
 
-    void Vector::Save(const std::string& FileName) {
+    void Vector::Save(const std::string& FileName, std::function<std::string(std::string)> HashFunction) {
         Create(FileName);
 
-        std::string Temp;
+        std::string Temp = "";
+        std::string Line = "";
         for (int Count = 0; Count < Content.size(); Count++) {
+            Line = "";
             for (size_t j = 0; j < Content[Count].size(); j++)
             {
                 uint8_t Data = Content[Count][j];
-                if (Data < 100) Temp += "0";
-                if (Data < 10) Temp += "0";
-                Temp += std::to_string(Data);
+                if (Data < 100) Line += "0";
+                if (Data < 10) Line += "0";
+                Line += std::to_string(Data);
             }
-            if(Count < Content.size() - 1) Temp += "\n";
+            if (HashFunction && Content[Count] != "") Line = HashFunction(Line);
+            Temp += Line;
+            if (Count < Content.size() - 1) Temp += "\n";
         }
         Temp += "\0";
 
