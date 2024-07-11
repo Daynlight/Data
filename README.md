@@ -51,18 +51,6 @@ Vector:<br>
 2.10 Acces to Data Vector<br>
 <code>[ClassName].Content</code></br>
 
-<h2>✨Contributors✨</h2>
-<table>
-    <td align=center>
-    <a href="https://github.com/Daynlight"><img height=100px src="https://avatars.githubusercontent.com/u/62157770?v=4"></a>
-    <a href="https://github.com/Daynlight"><div align=center>Daynlight</div></a>
-    <table align=center>
-      <td title="Programing">💻</td>
-      <td title="Manage">💼</td>
-    </table>
-  </td>
-</table>
-
 <h2>🔥Features🔥</h2>
 </div>
 <div align=left>
