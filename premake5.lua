@@ -11,8 +11,12 @@ workspace "MAT-CPP"
 
 project "Test"  
     kind "ConsoleApp"
-    files { "**.h", "**.cpp" } 
+    files { "*.h", "*.cpp" } 
 
     filter "configurations:Test"
         defines { "Test" }  
         symbols "On"
+
+projecy "CPP-DATA"
+    kind "StaticLib"
+    files { "CPP-DATA/**.h", "CPP-DATA/**.cpp" }
