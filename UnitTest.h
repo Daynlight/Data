@@ -4,10 +4,9 @@
 #include <filesystem>
 #include <string>
 
-class TestArray
-{
+class TestArray {
 public:
-	void ShowAll();
+	TestArray();
 	void Exist();
 	void CreateFile();
 	void RemoveFile();
@@ -22,14 +21,14 @@ public:
 	void HashTest();
 
 private:
+	unsigned int ran = 0;
+	unsigned int passed = 0;
 	Data::Array Array = Data::Array("Test", 10);
 };
 
-
-class TestVector
-{
+class TestVector {
 public:
-	void ShowAll();
+	TestVector();
 	void Exist();
 	void CreateFile();
 	void RemoveFile();
@@ -44,5 +43,7 @@ public:
 	void HashTest();
 
 private:
+	unsigned int ran = 0;
+	unsigned int passed = 0;
 	Data::Vector Vector = Data::Vector("Test");
 };

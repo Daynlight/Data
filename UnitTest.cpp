@@ -1,17 +1,9 @@
-#include "Test.h"
+#include "UnitTest.h"
 
-int main() {
-	TestArray ArrayTest = TestArray();
-	TestVector VerctorTest = TestVector();
-
-	VerctorTest.ShowAll();
-	ArrayTest.ShowAll();
-
-	return 0;
-}
-
-void TestArray::ShowAll()
+TestArray::TestArray()
 {
+	std::cout << "Array Test\n";
+	
 	Exist();
 	GetSize();
 	FolderChange();
@@ -23,10 +15,17 @@ void TestArray::ShowAll()
 	PrintData();
 	UpdateFilesList();
 	HashTest();
+
+	if (ran == passed)
+		std::cout << "All Arrays tests passed\n";
+	else
+		std::cout << "Some Arrays tests failed\n";
 }
 
-void TestVector::ShowAll()
+TestVector::TestVector()
 {
+	std::cout << "Vector Test All\n";
+	
 	Exist();
 	GetSize();
 	FolderChange();
@@ -38,22 +37,35 @@ void TestVector::ShowAll()
 	PrintData();
 	UpdateFilesList();
 	HashTest();
+
+	if (ran == passed)
+		std::cout << "All Vectors tests passed\n";
+	else
+		std::cout << "Some Vectors tests failed\n";
 }
 
-void TestArray::Exist()
-{
-	std::cout << "\n------------ Check Exist ------------\n";
+void TestArray::Exist() {
+	ran++;
+	std::cout << "Check Exist Function\n";
+	
+	// assert
+	if (Array.IsEmpty("TestArray")) {
+		Array.Create("TestArray");
+		Array.Content[0] = "Test1";
+		Array.Save("TestArray");
+		if (!Array.IsEmpty("TestArray")) {
+			passed++;
+			std::cout << "TestArray Exist condition Passed\n";
+		}
+		else {
+			std::cout << "TestArray Exist condition Failed on Checking Not Empty Folder\n";
+		}
+	}
+	else {
+		std::cout << "TestArray Exist condition Failed on Checking Empty Folder\n";
+	}
 
-	std::cout << "File Test1 Exist condition " << Array.IsEmpty("Test1") << "\n";
-
-	Array.Create("TestExist");
-	std::cout << "File Test1 Exist condition " << Array.IsEmpty("Test1") << "\n";
-
-	Array.Content[0] = "Test1";
-	Array.Save("TestExist");
-	std::cout << "File Test1 Exist condition " << Array.IsEmpty("Test1") << "\n";
-
-	Array.Remove("TestExist");
+	Array.Remove("TestArray");
 }
 
 void TestArray::CreateFile()
