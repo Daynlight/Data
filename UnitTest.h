@@ -7,12 +7,16 @@
 class TestArray {
 public:
 	TestArray();
-	void Exist();
-	void CreateFile();
-	void RemoveFile();
-	void SaveFile();
+	void CheckIfFileIsNotEmptyWorking_IfFileInNotEmptyWorked();
+
+	void CREATEFILE_FILECREATED();
+	void REMOVEFILE_FILEREMOVED();
+	
+	void SAVEFILE_FILESAVED();
 	void ReadFile();
+	
 	void FolderChange();
+	
 	void ManageData();
 	void PrintData();
 	void UpdateFilesList();
