@@ -1,425 +1,149 @@
-#include "UnitTest.h"
+﻿#include "UnitTest.h"
 
-TestArray::TestArray() {
-  std::cout << "Array Test\n";
-
-  CheckIfFileIsNotEmptyWorking_IfFileInNotEmptyWorked();
-  CREATEFILE_FILECREATED();
-  REMOVEFILE_FILEREMOVED();
-  SAVEFILE_FILESAVED();
-  GetSize();
-  FolderChange();
-  ReadFile();
-  ManageData();
-  PrintData();
-  UpdateFilesList();
-  HashTest();
-
-  if (ran == passed)
-    std::cout << "All Arrays tests passed\n";
-  else
-    std::cout << "Some Arrays tests failed\n";
-}
-
-TestVector::TestVector() {
-  std::cout << "Vector Test All\n";
-
-  Exist();
-  GetSize();
-  FolderChange();
-  CreateFile();
-  RemoveFile();
-  SaveFile();
-  ReadFile();
-  ManageData();
-  PrintData();
-  UpdateFilesList();
-  HashTest();
-
-  if (ran == passed)
-    std::cout << "All Vectors tests passed\n";
-  else
-    std::cout << "Some Vectors tests failed\n";
-}
-
-void TestArray::CheckIfFileIsNotEmptyWorking_IfFileInNotEmptyWorked() {
-  ran++;
-
-  // act part 1
-  Array.Remove("TestArray.txt");
-
-  // assert part 1
-  if (Array.IsEmpty("TestArray.txt")) {
-
-    // act part 2
-    Array.Create("TestArray.txt");
-    Array.Content[0] = "Test1";
-    Array.Save("TestArray.txt");
-
-    // arrange part 2
-    if (!Array.IsEmpty("TestArray.txt")) {
-      passed++;
-      std::cout << "CheckIfFileIsNotEmptyWorking_IfFileInNotEmptyWorked Passed\n";
-    }
-    else {
-      std::cout << "CheckIfFileIsNotEmptyWorking_IfFileInNotEmptyWorked Failed on Checking Not Empty Folder\n";
-    }
-  }
-  else {
-    std::cout << "CHECKIFEXISTFILE_FILECHECKINGEXISTWORKING Failed on Checking Empty Folder\n";
-  }
-
-  // clean up
-  Array.Remove("TestArray.txt");
-}
-
-void TestArray::CREATEFILE_FILECREATED() {
-  ran++;
-
-  // arrange
-  Array.Remove("TestArray.txt");
-
-  // act
-  Array.Create("TestArray.txt");
-
-  // assert
-  if (Array.IsEmpty("TestArray.txt")) {
-    passed++;
-    std::cout << "CREATEFILE_FILECREATED Passed\n";
-  }
-  else {
-    std::cout << "CREATEFILE_FILECREATED Failed\n";
-  }
-
-  // clean up
-  Array.Remove("TestArray.txt");
-}
-
-void TestArray::REMOVEFILE_FILEREMOVED()
+UnitTest::UnitTest()
 {
-  ran++;
+	std::cout << "Unit Test Started" << std::endl;
 
-  //arrange
-  Array.Create("TestArray.txt");
-  Array.Content[0] = "Test";
-  Array.Save("TestArray.txt");
+	Data_GetSize_SizeReturned(10);
+	Data_GetSize_SizeReturned(0);
+	Data_GetSize_SizeReturned(100);
+	Data_GetSize_SizeReturned(1000);
+	Data_GetSize_SizeReturned(10000);
+	Data_GetSize_SizeReturned(100000);
 
-  // act
-  Array.Remove("TestArray.txt");
+	Data_PushData_DataPushed("Hello World!!!");
+	Data_PushData_DataPushed("Witaj Świecie!!!");
+	Data_PushData_DataPushed("Hallo Welt!!!");
+	Data_PushData_DataPushed("Bonjour le monde!!!");
+	Data_PushData_DataPushed("Hola Mundo!!!");
+	Data_PushData_DataPushed("Ciao mondo!!!");
+	Data_PushData_DataPushed("Привет, мир!!!");
+	Data_PushData_DataPushed("こんにちは世界!!!");
+	Data_PushData_DataPushed("你好，世界！！！");
+	Data_PushData_DataPushed("안녕하세요 세계!!!");
 
-  // assert
-  if (Array.IsEmpty("TestArray.txt")) {
-    passed++;
-    std::cout << "REMOVEFILE_FILEREMOVED Passed\n";
-  }
-  else {
-    std::cout << "REMOVEFILE_FILEREMOVED Failed\n";
-  }
+	Data_PopData_DataPopped("Hello World!!!");
+	Data_PopData_DataPopped("Witaj Świecie!!!");
+	Data_PopData_DataPopped("Hallo Welt!!!");
+	Data_PopData_DataPopped("Bonjour le monde!!!");
+	Data_PopData_DataPopped("Hola Mundo!!!");
+	Data_PopData_DataPopped("Ciao mondo!!!");
+	Data_PopData_DataPopped("Привет, мир!!!");
+	Data_PopData_DataPopped("こんにちは世界!!!");
+	Data_PopData_DataPopped("你好，世界！！！");
+	Data_PopData_DataPopped("안녕하세요 세계!!!");
 
-  // clean up
-  Array.Remove("TestArray.txt");
+	Data_ManageData_DataManaged("Hello", "World");
+	Data_ManageData_DataManaged("Witaj", "Świecie");
+	Data_ManageData_DataManaged("Hallo", " Welt");
+	Data_ManageData_DataManaged("Bonjour", " le monde");
+	Data_ManageData_DataManaged("Hola", "Mundo");
+	Data_ManageData_DataManaged("Ciao", "Mondo");
+	Data_ManageData_DataManaged("Привет", "мир");
+	Data_ManageData_DataManaged("こんにちは", "世界");
+	Data_ManageData_DataManaged("你好", "世界");
+	Data_ManageData_DataManaged("안녕하세요", "세계");
+
+	Data_SaveAndRead_DataSavedAndRead("Hello World!!!");
+	Data_SaveAndRead_DataSavedAndRead("Witaj Świecie!!!");
+	Data_SaveAndRead_DataSavedAndRead("Hallo Welt!!!");
+	Data_SaveAndRead_DataSavedAndRead("Bonjour le monde!!!");
+	Data_SaveAndRead_DataSavedAndRead("Hola Mundo!!!");
+	Data_SaveAndRead_DataSavedAndRead("Ciao mondo!!!");
+	Data_SaveAndRead_DataSavedAndRead("Привет, мир!!!");
+	Data_SaveAndRead_DataSavedAndRead("こんにちは世界!!!");
+	Data_SaveAndRead_DataSavedAndRead("你好，世界！！！");
+	Data_SaveAndRead_DataSavedAndRead("안녕하세요 세계!!!");
+
+	if (ran == passed)
+		std::cout << "All tests passed" << std::endl;
+	else
+		std::cout << "Some tests failed" << std::endl;
 }
 
-void TestArray::SAVEFILE_FILESAVED()
+void UnitTest::Data_GetSize_SizeReturned(size_t size) {
+	ran++;
+	// Arrange
+	Data::Data data_class = Data::Data("data.txt", size);
+	for (size_t i = 0; i < size; i++) {
+		data_class.Push("Hello World!!!");
+	}
+	// Act
+	size_t data_size = data_class.Size();
+	// Assert
+	if (data_size == size) {
+		passed++;
+		std::cout << "Data_GetSize_SizeReturned Passed" << std::endl;
+	}
+	else
+		std::cout << "Data_GetSize_SizeReturned Failed" << std::endl;
+}
+
+void UnitTest::Data_PushData_DataPushed(std::string data) {
+	ran++;
+	// Arrange
+	Data::Data data_class = Data::Data("data.txt", 0);
+	if (data_class.Size() == 0) {
+		// Act
+		data_class.Push(data);
+		// Assert
+		if (data_class.Size() == 1 && data_class[data_class.Size() - 1] == data) {
+			passed++;
+			std::cout << "Data_PushData_DataPushed Passed" << std::endl;
+		}
+		else
+			std::cout << "Data_PushData_DataPushed Failed" << std::endl;
+	}
+}
+
+void UnitTest::Data_PopData_DataPopped(std::string data)
 {
-  ran++;
-
-  // arrange
-  Array.Remove("TestArray.txt");
-  Array.Content[0] = "Test";
-  
-  // act part 1
-  Array.Save("TestArray.txt");
-  Array.Content->clear();
-  if (!Array.Content->size()) {
-
-    //act part 2
-    Array.Read("TestArray.txt");
-
-    // assert part 2
-    if (Array.Content[0] == "Test") {
-      passed++;
-      std::cout << "SAVEFILE_FILESAVED Passed\n";
-    }
-    else {
-      std::cout << "SAVEFILE_FILESAVED Failed on Read\n";
-    }
-  }
-  else {
-    std::cout << "SAVEFILE_FILESAVED Failed on cleaning\n";
-  }
-
-  // clean up
-  Array.Remove("TestArray.txt");
+	ran++;
+	// Arrange
+	Data::Data data_class = Data::Data("data.txt", 0);
+	data_class.Push(data);
+	// Act
+	std::string popped_data = data_class.Pop();
+	// Assert
+	if (popped_data == data && data_class.Size() == 0) {
+		passed++;
+		std::cout << "Data_PopData_DataPopped Passed" << std::endl;
+	}
+	else
+		std::cout << "Data_PopData_DataPopped Failed" << std::endl;
 }
 
-void TestArray::ReadFile()
+void UnitTest::Data_ManageData_DataManaged(std::string data_entry, std::string data_change)
 {
-  std::cout << "\n------------ TestRead ------------\n";
-  PrintData();
-
-  Array.Content[0] = "Test";
-  Array.Content[2] = "Test2";
-  Array.Content[5] = "�";
-  std::cout << "�";
-  Array.Save("Test");
-  PrintData();
-  std::cout << "Saved\n";
-
-  for (size_t i = 0; i < Array.Size; i++)
-  {
-    Array.Content[i] = "";
-  }
-
-  std::cout << "Cleared\n";
-  PrintData();
-
-  Array.Read("Test");
-
-  std::cout << "Readed from Test\n";
-  PrintData();
+	ran++;
+	// Arrange
+	Data::Data data_class = Data::Data("data.txt", 0);
+	data_class.Push(data_entry);
+	// Act
+	data_class[0] = data_change;
+	// Assert
+	if (data_class[0] == data_change) {
+		passed++;
+		std::cout << "Data_ManageData_DataManaged Passed" << std::endl;
+	}
+	else
+		std::cout << "Data_ManageData_DataManaged Failed" << std::endl;
 }
 
-void TestArray::FolderChange()
-{
-  std::cout << "\n------------ FolderChange ------------\n";
-
-  std::cout << Array.FolderChange() << "\n";
-  Array.Create("Test5");
-  std::cout << Array.FolderChange() << "\n";
-  Array.Remove("Test5");
-  std::cout << Array.FolderChange() << "\n";
-}
-
-void TestArray::ManageData()
-{
-  std::cout << "\n------------ TestManage ------------\n";
-
-  Array.Content[0] = "A";
-  Array.Content[1] = "A";
-  Array.Content[2] = "A";
-
-  std::cout << Array.Content[0];
-  std::cout << Array.Content[1];
-  std::cout << Array.Content[2];
-}
-
-void TestArray::PrintData()
-{
-  std::cout << "\n------------ PrintData ------------\n";
-  for (size_t i = 0; i < Array.Size; i++)
-  {
-    std::cout << i << " " << Array.Content[i] << "\n";
-  };
-}
-
-void TestArray::UpdateFilesList()
-{
-  std::cout << "\n------------ UpdateFilesList ------------\n";
-  Array.UpdateList();
-  ListFiles();
-  Array.Create("Test3");
-  ListFiles();
-  Array.Remove("Test3");
-}
-
-void TestArray::ListFiles()
-{
-  std::cout << "\n------------ PrintFilesList ------------\n";
-  for (size_t i = 0; i < Array.FileList.size(); i++)
-  {
-    std::cout << Array.FileList[i].string() << "\n";
-  };
-}
-
-void TestArray::GetSize()
-{
-  std::cout << "\n------------ GetSize ------------\n";
-  std::cout << "Size: " << Array.Size << "\n";
-}
-
-std::string Hash(std::string Data) {
-  for (size_t i = 0; i < Data.size(); i++)
-  {
-    Data[i] = Data[i] * 2;
-  }
-  return Data;
-}
-
-std::string UnHash(std::string Data) {
-  for (size_t i = 0; i < Data.size(); i++)
-  {
-    Data[i] = Data[i] / 2;
-  }
-  return Data;
-}
-
-void TestArray::HashTest()
-{
-  std::cout << "\n------------ Hash Test ------------\n";
-  Array.Content[0] = "Test";
-  Array.Content[4] = "Test2";
-  Array.Content[7] = "�";
-  std::cout << "\n------------ Data ------------\n";
-  PrintData();
-  Array.Save("TestHash", &Hash);
-
-  for (size_t i = 0; i < Array.Size; i++)
-    Array.Content[i] = "";
-
-  std::cout << "\n------------ Cleared ------------\n";
-  PrintData();
-
-  std::cout << "\n------------ Cleared ------------\n";
-  Array.Read("TestHash", &UnHash);
-  PrintData();
-}
-
-void TestVector::HashTest()
-{
-  std::cout << "\n------------ Hash Test ------------\n";
-  Vector.Content.emplace_back("Test");
-  Vector.Content.emplace_back("Test2");
-  Vector.Content.emplace_back("�");
-
-  std::cout << "\n------------ Data ------------\n";
-  PrintData();
-  Vector.Save("TestHash", &Hash);
-
-  Vector.Content.clear();
-
-  std::cout << "\n------------ Cleared ------------\n";
-  PrintData();
-
-  std::cout << "\n------------ Cleared ------------\n";
-  Vector.Read("TestHash", &UnHash);
-  PrintData();
-
-}
-
-void TestVector::Exist()
-{
-  std::cout << "\n------------ Check Exist ------------\n";
-
-  std::cout << "File Test1 Exist condition " << Vector.IsEmpty("Test1") << "\n";
-
-  Vector.Create("TestExist");
-  std::cout << "File Test1 Exist condition " << Vector.IsEmpty("Test1") << "\n";
-
-  Vector.Content.emplace_back("Test1");
-  Vector.Save("TestExist");
-  std::cout << "File Test1 Exist condition " << Vector.IsEmpty("Test1") << "\n";
-
-  Vector.Remove("TestExist");
-}
-
-void TestVector::CreateFile()
-{
-  std::cout << "\n------------ TestCreate ------------\n";
-
-  Vector.Create("Test");
-
-  std::cout << "Created Test\n";
-}
-
-void TestVector::RemoveFile()
-{
-  std::cout << "\n------------ TestRemove ------------\n";
-
-  Vector.Remove("Test");
-
-  std::cout << "Removed Test\n";
-}
-
-void TestVector::SaveFile()
-{
-  std::cout << "\n------------ TestSave ------------\n";
-
-  Vector.Content.emplace_back("Test");
-  Vector.Save("Test");
-
-  std::cout << "Saved to Test\n";
-}
-
-void TestVector::ReadFile()
-{
-  std::cout << "\n------------ TestRead ------------\n";
-  PrintData();
-
-  Vector.Content.emplace_back("Test");
-  Vector.Content.emplace_back("Test2");
-  Vector.Content.emplace_back("�");
-  std::cout << "�";
-  Vector.Save("Test");
-  PrintData();
-  std::cout << "Saved\n";
-
-  Vector.Content.clear();
-
-
-  std::cout << "Cleared\n";
-  PrintData();
-
-  Vector.Read("Test");
-
-  std::cout << "Readed from Test\n";
-  PrintData();
-}
-
-void TestVector::FolderChange()
-{
-  std::cout << "\n------------ FolderChange ------------\n";
-
-  std::cout << Vector.FolderChange() << "\n";
-  Vector.Create("Test5");
-  std::cout << Vector.FolderChange() << "\n";
-  Vector.Remove("Test5");
-  std::cout << Vector.FolderChange() << "\n";
-}
-
-void TestVector::ManageData()
-{
-  std::cout << "\n------------ TestManage ------------\n";
-
-  Vector.Content.emplace_back("A");
-  Vector.Content.emplace_back("A");
-  Vector.Content.emplace_back("A");
-
-  std::cout << Vector.Content[0];
-  std::cout << Vector.Content[1];
-  std::cout << Vector.Content[2];
-}
-
-void TestVector::PrintData()
-{
-  std::cout << "\n------------ PrintData ------------\n";
-  for (size_t i = 0; i < Vector.Content.size(); i++)
-  {
-    std::cout << i << " " << Vector.Content[i] << "\n";
-  };
-}
-
-void TestVector::UpdateFilesList()
-{
-  std::cout << "\n------------ UpdateFilesList ------------\n";
-  Vector.UpdateList();
-  ListFiles();
-  Vector.Create("Test3");
-  ListFiles();
-  Vector.Remove("Test3");
-}
-
-void TestVector::ListFiles()
-{
-  std::cout << "\n------------ PrintFilesList ------------\n";
-  for (size_t i = 0; i < Vector.FileList.size(); i++)
-  {
-    std::cout << Vector.FileList[i].string() << "\n";
-  };
-}
-
-void TestVector::GetSize()
-{
-  std::cout << "\n------------ GetSize ------------\n";
-  std::cout << "Size: " << Vector.Content.size() << "\n";
+void UnitTest::Data_SaveAndRead_DataSavedAndRead(std::string data) {
+	ran++;
+	// Arrange
+	Data::Data data_class = Data::Data("data.txt", 0);
+	data_class.Push(data);
+	// Act
+	data_class.Save();
+	data_class.Pop();
+	data_class.Read();
+	// Assert
+	if (data_class.Size() == 1 && data_class[0] == data) {
+		passed++;
+		std::cout << "Data_SaveAndRead_DataSavedAndRead Passed" << std::endl;
+	}
+	else
+		std::cout << "Data_SaveAndRead_DataSavedAndRead Failed" << std::endl;
 }

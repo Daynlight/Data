@@ -2,8 +2,7 @@
 
 int main() {
 
-	TestArray array_test = TestArray();
-	TestVector vector_test = TestVector();
+	UnitTest test;
 
 	return 0;
 }

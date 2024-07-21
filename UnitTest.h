@@ -1,53 +1,17 @@
 #pragma once
 #include "CPP-DATA/Data.h"
 #include <iostream>
-#include <filesystem>
-#include <string>
 
-class TestArray {
+class UnitTest {
 public:
-	TestArray();
-	void CheckIfFileIsNotEmptyWorking_IfFileInNotEmptyWorked();
-
-	void CREATEFILE_FILECREATED();
-	void REMOVEFILE_FILEREMOVED();
-	
-	void SAVEFILE_FILESAVED();
-	void ReadFile();
-	
-	void FolderChange();
-	
-	void ManageData();
-	void PrintData();
-	void UpdateFilesList();
-	void ListFiles();
-	void GetSize();
-	void HashTest();
+	UnitTest();
+	void Data_GetSize_SizeReturned(size_t size = 3);
+	void Data_PushData_DataPushed(std::string data = "Hello World!!!");
+	void Data_PopData_DataPopped(std::string data = "Hello World!!!");
+	void Data_ManageData_DataManaged(std::string data_entry = "Hello", std::string data_change = "World");
+	void Data_SaveAndRead_DataSavedAndRead(std::string data = "Hello World!!!");
 
 private:
 	unsigned int ran = 0;
 	unsigned int passed = 0;
-	Data::Array Array = Data::Array("Test", 10);
-};
-
-class TestVector {
-public:
-	TestVector();
-	void Exist();
-	void CreateFile();
-	void RemoveFile();
-	void SaveFile();
-	void ReadFile();
-	void FolderChange();
-	void ManageData();
-	void PrintData();
-	void UpdateFilesList();
-	void ListFiles();
-	void GetSize();
-	void HashTest();
-
-private:
-	unsigned int ran = 0;
-	unsigned int passed = 0;
-	Data::Vector Vector = Data::Vector("Test");
 };
