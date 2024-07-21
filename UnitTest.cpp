@@ -1,59 +1,56 @@
 ﻿#include "UnitTest.h"
 
-UnitTest::UnitTest()
-{
+UnitTest::UnitTest() {
 	std::cout << "Unit Test Started" << std::endl;
 
-	Data_GetSize_SizeReturned(10);
-	Data_GetSize_SizeReturned(0);
-	Data_GetSize_SizeReturned(100);
-	Data_GetSize_SizeReturned(1000);
-	Data_GetSize_SizeReturned(10000);
-	Data_GetSize_SizeReturned(100000);
+	File_GetSize_SizeReturned(10);
+	File_GetSize_SizeReturned(0);
+	File_GetSize_SizeReturned(100);
+	File_GetSize_SizeReturned(1000);
+	File_GetSize_SizeReturned(10000);
+	File_GetSize_SizeReturned(100000);
 
-	Data_PushData_DataPushed("Hello World!!!");
-	Data_PushData_DataPushed("Witaj Świecie!!!");
-	Data_PushData_DataPushed("Hallo Welt!!!");
-	Data_PushData_DataPushed("Bonjour le monde!!!");
-	Data_PushData_DataPushed("Hola Mundo!!!");
-	Data_PushData_DataPushed("Ciao mondo!!!");
-	Data_PushData_DataPushed("Привет, мир!!!");
-	Data_PushData_DataPushed("こんにちは世界!!!");
-	Data_PushData_DataPushed("你好，世界！！！");
-	Data_PushData_DataPushed("안녕하세요 세계!!!");
+	File_PushData_DataPushed("Hello World!!!");
+	File_PushData_DataPushed("Witaj Świecie!!!");
+	File_PushData_DataPushed("Hallo Welt!!!");
+	File_PushData_DataPushed("Bonjour le monde!!!");
+	File_PushData_DataPushed("Hola Mundo!!!");
+	File_PushData_DataPushed("Ciao mondo!!!");
 
-	Data_PopData_DataPopped("Hello World!!!");
-	Data_PopData_DataPopped("Witaj Świecie!!!");
-	Data_PopData_DataPopped("Hallo Welt!!!");
-	Data_PopData_DataPopped("Bonjour le monde!!!");
-	Data_PopData_DataPopped("Hola Mundo!!!");
-	Data_PopData_DataPopped("Ciao mondo!!!");
-	Data_PopData_DataPopped("Привет, мир!!!");
-	Data_PopData_DataPopped("こんにちは世界!!!");
-	Data_PopData_DataPopped("你好，世界！！！");
-	Data_PopData_DataPopped("안녕하세요 세계!!!");
+	File_PopData_DataPopped("Hello World!!!");
+	File_PopData_DataPopped("Witaj Świecie!!!");
+	File_PopData_DataPopped("Hallo Welt!!!");
+	File_PopData_DataPopped("Bonjour le monde!!!");
+	File_PopData_DataPopped("Hola Mundo!!!");
+	File_PopData_DataPopped("Ciao mondo!!!");
 
-	Data_ManageData_DataManaged("Hello", "World");
-	Data_ManageData_DataManaged("Witaj", "Świecie");
-	Data_ManageData_DataManaged("Hallo", " Welt");
-	Data_ManageData_DataManaged("Bonjour", " le monde");
-	Data_ManageData_DataManaged("Hola", "Mundo");
-	Data_ManageData_DataManaged("Ciao", "Mondo");
-	Data_ManageData_DataManaged("Привет", "мир");
-	Data_ManageData_DataManaged("こんにちは", "世界");
-	Data_ManageData_DataManaged("你好", "世界");
-	Data_ManageData_DataManaged("안녕하세요", "세계");
+	File_ManageData_DataManaged("Hello", "World");
+	File_ManageData_DataManaged("Witaj", "Świecie");
+	File_ManageData_DataManaged("Hallo", " Welt");
+	File_ManageData_DataManaged("Bonjour", " le monde");
+	File_ManageData_DataManaged("Hola", "Mundo");
+	File_ManageData_DataManaged("Ciao", "Mondo");
 
-	Data_SaveAndRead_DataSavedAndRead("Hello World!!!");
-	Data_SaveAndRead_DataSavedAndRead("Witaj Świecie!!!");
-	Data_SaveAndRead_DataSavedAndRead("Hallo Welt!!!");
-	Data_SaveAndRead_DataSavedAndRead("Bonjour le monde!!!");
-	Data_SaveAndRead_DataSavedAndRead("Hola Mundo!!!");
-	Data_SaveAndRead_DataSavedAndRead("Ciao mondo!!!");
-	Data_SaveAndRead_DataSavedAndRead("Привет, мир!!!");
-	Data_SaveAndRead_DataSavedAndRead("こんにちは世界!!!");
-	Data_SaveAndRead_DataSavedAndRead("你好，世界！！！");
-	Data_SaveAndRead_DataSavedAndRead("안녕하세요 세계!!!");
+	File_SaveAndRead_DataSavedAndRead("Hello World!!!");
+	File_SaveAndRead_DataSavedAndRead("Witaj Świecie!!!");
+	File_SaveAndRead_DataSavedAndRead("Hallo Welt!!!");
+	File_SaveAndRead_DataSavedAndRead("Bonjour le monde!!!");
+	File_SaveAndRead_DataSavedAndRead("Hola Mundo!!!");
+	File_SaveAndRead_DataSavedAndRead("Ciao mondo!!!");
+
+	File_FileIsDifferent_FileIsDifferentWorks("Hello", "World");
+	File_FileIsDifferent_FileIsDifferentWorks("Witaj", "Świecie");
+	File_FileIsDifferent_FileIsDifferentWorks("Hallo", " Welt");
+	File_FileIsDifferent_FileIsDifferentWorks("Bonjour", " le monde");
+	File_FileIsDifferent_FileIsDifferentWorks("Hola", "Mundo");
+	File_FileIsDifferent_FileIsDifferentWorks("Ciao", "Mondo");
+
+	File_CreateAndRemoveFile_FileCreatedAndRemoved("data.txt");
+	File_CreateAndRemoveFile_FileCreatedAndRemoved("HelloThere.txt");
+	File_CreateAndRemoveFile_FileCreatedAndRemoved("World.txt");
+	File_CreateAndRemoveFile_FileCreatedAndRemoved("HelloWorld.txt");
+
+	File_IsEmpty_IsEmptyWorks();
 
 	if (ran == passed)
 		std::cout << "All tests passed" << std::endl;
@@ -61,89 +58,169 @@ UnitTest::UnitTest()
 		std::cout << "Some tests failed" << std::endl;
 }
 
-void UnitTest::Data_GetSize_SizeReturned(size_t size) {
+void UnitTest::File_GetSize_SizeReturned(size_t size) {
 	ran++;
 	// Arrange
-	Data::Data data_class = Data::Data("data.txt", size);
+	Data::File file_class = Data::File("data.txt", size);
 	for (size_t i = 0; i < size; i++) {
-		data_class.Push("Hello World!!!");
+		file_class.Push("Hello World!!!");
 	}
 	// Act
-	size_t data_size = data_class.Size();
+	size_t data_size = file_class.Size();
 	// Assert
 	if (data_size == size) {
 		passed++;
-		std::cout << "Data_GetSize_SizeReturned Passed" << std::endl;
+		std::cout << "File_GetSize_SizeReturned Passed" << std::endl;
 	}
 	else
-		std::cout << "Data_GetSize_SizeReturned Failed" << std::endl;
+		std::cout << "File_GetSize_SizeReturned Failed" << std::endl;
 }
 
-void UnitTest::Data_PushData_DataPushed(std::string data) {
+void UnitTest::File_PushData_DataPushed(std::string data) {
 	ran++;
 	// Arrange
-	Data::Data data_class = Data::Data("data.txt", 0);
-	if (data_class.Size() == 0) {
-		// Act
-		data_class.Push(data);
-		// Assert
-		if (data_class.Size() == 1 && data_class[data_class.Size() - 1] == data) {
+	Data::File file_class = Data::File("data.txt", 0);
+	// Assert p1
+	if (file_class.Size() == 0) {
+		// Act p2
+		file_class.Push(data);
+		// Assert p2
+		if (file_class.Size() == 1 && file_class[file_class.Size() - 1] == data) {
 			passed++;
-			std::cout << "Data_PushData_DataPushed Passed" << std::endl;
+			std::cout << "File_PushData_DataPushed Passed" << std::endl;
 		}
 		else
-			std::cout << "Data_PushData_DataPushed Failed" << std::endl;
-	}
-}
-
-void UnitTest::Data_PopData_DataPopped(std::string data)
-{
-	ran++;
-	// Arrange
-	Data::Data data_class = Data::Data("data.txt", 0);
-	data_class.Push(data);
-	// Act
-	std::string popped_data = data_class.Pop();
-	// Assert
-	if (popped_data == data && data_class.Size() == 0) {
-		passed++;
-		std::cout << "Data_PopData_DataPopped Passed" << std::endl;
+			std::cout << "File_PushData_DataPushed Failed on p2" << std::endl;
 	}
 	else
-		std::cout << "Data_PopData_DataPopped Failed" << std::endl;
-}
+		std::cout << "File_PushData_DataPushed Failed on p1" << std::endl;
+};
 
-void UnitTest::Data_ManageData_DataManaged(std::string data_entry, std::string data_change)
-{
+void UnitTest::File_PopData_DataPopped(std::string data) {
 	ran++;
 	// Arrange
-	Data::Data data_class = Data::Data("data.txt", 0);
-	data_class.Push(data_entry);
+	Data::File file_class = Data::File("data.txt", 0);
+	file_class.Push(data);
 	// Act
-	data_class[0] = data_change;
+	std::string popped_data = file_class.Pop();
 	// Assert
-	if (data_class[0] == data_change) {
+	if (popped_data == data && file_class.Size() == 0) {
 		passed++;
-		std::cout << "Data_ManageData_DataManaged Passed" << std::endl;
+		std::cout << "File_PopData_DataPopped Passed" << std::endl;
 	}
 	else
-		std::cout << "Data_ManageData_DataManaged Failed" << std::endl;
-}
+		std::cout << "File_PopData_DataPopped Failed" << std::endl;
+};
 
-void UnitTest::Data_SaveAndRead_DataSavedAndRead(std::string data) {
+void UnitTest::File_ManageData_DataManaged(std::string data_entry, std::string data_change) {
 	ran++;
 	// Arrange
-	Data::Data data_class = Data::Data("data.txt", 0);
-	data_class.Push(data);
+	Data::File file_class = Data::File("data.txt", 0);
+	file_class.Push(data_entry);
 	// Act
-	data_class.Save();
-	data_class.Pop();
-	data_class.Read();
+	file_class[0] = data_change;
 	// Assert
-	if (data_class.Size() == 1 && data_class[0] == data) {
+	if (file_class[0] == data_change) {
 		passed++;
-		std::cout << "Data_SaveAndRead_DataSavedAndRead Passed" << std::endl;
+		std::cout << "File_ManageData_DataManaged Passed" << std::endl;
 	}
 	else
-		std::cout << "Data_SaveAndRead_DataSavedAndRead Failed" << std::endl;
+		std::cout << "File_ManageData_DataManaged Failed" << std::endl;
+};
+
+void UnitTest::File_SaveAndRead_DataSavedAndRead(std::string data) {
+	ran++;
+	// Arrange
+	Data::File file_class = Data::File("data.txt", 0);
+	file_class.Push(data);
+	// Act
+	file_class.Save();
+	file_class.Pop();
+	file_class.Read();
+	// Assert
+	if (file_class.Size() == 1 && file_class[0] == data) {
+		passed++;
+		std::cout << "File_SaveAndRead_DataSavedAndRead Passed" << std::endl;
+	}
+	else
+		std::cout << "File_SaveAndRead_DataSavedAndRead Failed" << std::endl;
+	// clean up
+	file_class.RemoveFile();
 }
+
+void UnitTest::File_CreateAndRemoveFile_FileCreatedAndRemoved(const std::string& filename) {
+	ran++;
+	// Arrange
+	Data::File file_class = Data::File(filename, 0);
+	// Act p1 
+	file_class.CreateFile();
+	// Assert p1
+	if (std::filesystem::exists(filename)) {
+		// Act p2
+		file_class.RemoveFile();
+		// Assert p2
+		if (!std::filesystem::exists(filename)) {
+			passed++;
+			std::cout << "File_CreateAndRemoveFile_FileCreatedAndRemoved Passed" << std::endl;
+		}
+		else
+			std::cout << "File_CreateAndRemoveFile_FileCreatedAndRemoved Failed p2" << std::endl;
+	}
+	else
+		std::cout << "File_CreateAndRemoveFile_FileCreatedAndRemoved Failed p1" << std::endl;
+	// clean up
+	file_class.RemoveFile();
+};
+
+void UnitTest::File_IsEmpty_IsEmptyWorks() {
+	ran++;
+	// Arrange
+	Data::File file_class = Data::File("data.txt", 0);
+	// Act p1
+	bool is_empty = file_class.IsEmpty();
+	// Assert p1
+	if (is_empty) {
+		// Act p2
+		file_class.Push("Hello World!!!");
+		file_class.Save();
+		is_empty = file_class.IsEmpty();
+		// Assert p2
+		if (!is_empty) {
+			passed++;
+			std::cout << "File_IsEmpty_IsEmptyWorks Passed" << std::endl;
+		}
+		else {
+			std::cout << "File_IsEmpty_IsEmptyWorks Failed on p2" << std::endl;
+		}
+	}
+	else
+		std::cout << "File_IsEmpty_IsEmptyWorks Failed on p1" << std::endl;
+	// clean up
+	file_class.RemoveFile();
+}
+
+void UnitTest::File_FileIsDifferent_FileIsDifferentWorks(std::string data_entry, std::string data_change) {
+	ran++;
+	// Arrange
+	Data::File file_class = Data::File("data.txt", 0);
+	file_class.Push(data_entry);
+	file_class.Save();
+	// Act p1
+	bool is_different = file_class.IsDifferent();
+	// Assert p1
+	if (!is_different) {
+		// Act p2
+		file_class[0] = data_change;
+		is_different = file_class.IsDifferent();
+		// Assert p2
+		if (is_different) {
+			passed++;
+			std::cout << "File_FileIsDifferent_FileIsDifferentWorks Passed" << std::endl;
+		}
+		else {
+			std::cout << "File_FileIsDifferent_FileIsDifferentWorks Failed on p2" << std::endl;
+		}
+	}
+	else
+		std::cout << "File_FileIsDifferent_FileIsDifferentWorks Failed on p1" << std::endl;
+};

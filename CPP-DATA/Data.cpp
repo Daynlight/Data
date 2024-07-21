@@ -2,34 +2,46 @@
 
 namespace Data
 {
-	Data::Data(const std::string& filename, const int size)
-		: filename(filename)
-	{
-		content.reserve(size);
-		if (!std::filesystem::exists(path_to_folder)) std::filesystem::create_directory(path_to_folder);
+	Data::Data(const std::string path_to_file) {
+		this->path_to_file = path_to_file;
 	};
 
-	void Data::Push(std::string data)
+	void Data::CreateFile() {
+		std::fstream file(path_to_file, std::ios::out);
+		file.close();
+	};
+
+	void Data::RemoveFile() {
+		std::remove(path_to_file.c_str());
+	};
+
+	File::File(const std::string& path_to_file, const int size)
+		: Data(path_to_file), path_to_file(path_to_file)
+	{
+		content.reserve(size);
+	};
+
+	void File::Push(std::string data)
 	{ content.emplace_back(data); };
 
-	std::string Data::Pop()
+	std::string File::Pop()
 	{
 		std::string temp = content[content.size() - 1];
 		content.pop_back();
 		return temp;
 	};
 
-	std::string& Data::operator[](int index)
+	std::string& File::operator[](int index)
 	{ return content[index]; };
 
-	size_t Data::Size()
+	size_t File::Size()
 	{ return content.size(); };
 
-	void Data::ChangeFilename(std::string filename)
-	{ this->filename = filename; };
+	void File::ChangePathToFile(const std::string& path_to_file)
+	{ this->path_to_file = path_to_file; };
 
-	void Data::Read(std::function<std::string(std::string)> un_hash_function) {
-		std::fstream file(path_to_folder.string() + "/" + filename, std::ios::in);
+	void File::Read(std::function<std::string(std::string)> un_hash_function) {
+		std::fstream file(path_to_file, std::ios::in);
 		std::string line = "";
 		std::string temp = "";
 		while (!file.eof()) {
@@ -49,7 +61,42 @@ namespace Data
 		file.close();
 	};
 
-	void Data::Save(std::function<std::string(std::string)> hash_function) {
+	bool File::IsEmpty(){
+		std::fstream file(path_to_file, std::ios::in);
+		if (file.peek() == std::ifstream::traits_type::eof()) 
+			return true;
+		return false;
+	};
+
+	bool File::IsDifferent(std::function<std::string(std::string)> un_hash_function) {
+		std::fstream file(path_to_file, std::ios::in);
+		std::string line = "";
+		std::string temp = "";
+
+		size_t count = 0;
+
+		while (!file.eof()) {
+			temp = "";
+			std::getline(file, line);
+			if (line != "")
+			{
+				if (un_hash_function) line = un_hash_function(line);
+				for (size_t j = 0; j < line.size(); j = j + 3)
+				{
+					uint8_t num = std::stoul(line.substr(j, 3));
+					temp += num;
+				}
+				if (count >= content.size()) return true;
+				if (content[count] != temp) return true;
+
+				count++;
+			}
+		}
+		file.close();
+		return false;
+	};
+
+	void File::Save(std::function<std::string(std::string)> hash_function) {
 
 		std::string temp = "";
 		std::string line = "";
@@ -67,7 +114,7 @@ namespace Data
 		}
 		temp += "\0";
 
-		std::fstream file(path_to_folder.string() + "\\" + filename, std::ios::out);
+		std::fstream file(path_to_file, std::ios::out);
 		file << temp;
 		file.close();
 	};
