@@ -15,6 +15,12 @@ namespace Data {
 		std::string temp = content[content.size() - 1];
 		content.pop_back();
 		return temp;
+	}
+
+	std::string File::Pop(const int id) {
+		std::string temp = content[id];
+		content.erase(content.begin() + id);
+		return temp;
 	};
 
 	std::string& File::operator[](int index)
@@ -27,6 +33,7 @@ namespace Data {
 	{ this->path_to_file = path_to_file; };
 
 	void File::Read(std::function<std::string(std::string)> un_hash_function) {
+		content.clear();
 		std::fstream file(path_to_file, std::ios::in);
 		std::string line = "";
 		std::string temp = "";
@@ -42,6 +49,7 @@ namespace Data {
 					temp += num;
 				}
 				content.emplace_back(temp);
+				temp = "";
 			}
 		}
 		file.close();
@@ -92,7 +100,6 @@ namespace Data {
 	};
 
 	void File::Save(std::function<std::string(std::string)> hash_function) {
-
 		std::string temp = "";
 		std::string line = "";
 		for (int count = 0; count < content.size(); count++) {
@@ -105,6 +112,7 @@ namespace Data {
 			}
 			if (hash_function && content[count] != "") line = hash_function(line);
 			temp += line;
+			line = "";
 			if (count < content.size() - 1) temp += "\n";
 		}
 		temp += "\0";

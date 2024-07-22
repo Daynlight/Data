@@ -20,6 +20,7 @@ public:
 	void File_GetSize_SizeReturned(size_t size = 3);
 	void File_PushData_DataPushed(std::string data = "Hello World!!!");
 	void File_PopData_DataPopped(std::string data = "Hello World!!!");
+	void File_PopDataAt_DataPoppedAt(std::vector<std::string> data = { "A", "B", "C" }, const int id = 0);
 	void File_ManageData_DataManaged(std::string data_entry = "Hello", std::string data_change = "World");
 	void File_SaveAndRead_DataSavedAndRead(std::string data = "Hello World!!!");
 	void File_CreateAndRemoveFile_FileCreatedAndRemoved(const std::string& filename);

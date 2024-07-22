@@ -14,6 +14,7 @@ namespace Data {
 		void ChangePathToFile(const std::string& path_to_file);
 		void Push(std::string data);
 		std::string Pop();
+		std::string Pop(const int id);
 		std::string& operator[](int index);
 		void Save(std::function<std::string(std::string)> hash_function = nullptr);
 		void Read(std::function<std::string(std::string)> un_hash_function = nullptr);
@@ -21,6 +22,7 @@ namespace Data {
 		void CreateFile();
 		void RemoveFile();
 		bool IsDifferent(std::function<std::string(std::string)> un_hash_function = nullptr);
+		// [Feature] Add Iterator
 
 	private:
 		std::vector<std::string> content;
@@ -42,6 +44,7 @@ namespace Data {
 		size_t GetFilesCount();
 		std::vector<std::string> GetFilesList();
 		bool IsDifferent();
+		// [Feature] Add Iterator
 
 	private:
 		std::vector<std::string> files;

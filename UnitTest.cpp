@@ -71,6 +71,8 @@ UnitTest::UnitTest() {
 	File_PopData_DataPopped("Hola Mundo!!!");
 	File_PopData_DataPopped("Ciao mondo!!!");
 
+	File_PopDataAt_DataPoppedAt();
+
 	File_ManageData_DataManaged("Hello", "World");
 	File_ManageData_DataManaged("Witaj", "Świecie");
 	File_ManageData_DataManaged("Hallo", " Welt");
@@ -157,6 +159,33 @@ void UnitTest::File_PopData_DataPopped(std::string data) {
 	}
 	else
 		std::cout << "File_PopData_DataPopped Failed" << std::endl;
+}
+
+void UnitTest::File_PopDataAt_DataPoppedAt(std::vector<std::string> data, const int id) {
+	ran++;
+	// Arrange
+	Data::File file_class = Data::File("data.txt", 0);
+	for (const std::string& d : data)
+		file_class.Push(d);
+	std::vector<std::string> in_data = data;
+	in_data.erase(in_data.begin() + id);
+	// Act
+	std::string popped_data = file_class.Pop(id);
+	// Assert part 1
+	if (popped_data == data[id]) {
+		bool same = true;
+		if (in_data.size() != file_class.Size()) same = false;
+		for (int i = 0; i < file_class.Size(); i++)
+			if (file_class[i] != in_data[i]) same = false;
+		if (same) {
+			passed++;
+			std::cout << "File_PopDataAt_DataPoppedAt Passed" << std::endl;
+		}
+		else
+			std::cout << "File_PopDataAt_DataPoppedAt Failed on Compare" << std::endl;
+	}
+	else
+		std::cout << "File_PopDataAt_DataPoppedAt Failed on Return" << std::endl;
 };
 
 void UnitTest::File_ManageData_DataManaged(std::string data_entry, std::string data_change) {
