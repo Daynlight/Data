@@ -1,22 +1,8 @@
 #include "Data.h"
 
-namespace Data
-{
-	Data::Data(const std::string path_to_file) {
-		this->path_to_file = path_to_file;
-	};
-
-	void Data::CreateFile() {
-		std::fstream file(path_to_file, std::ios::out);
-		file.close();
-	};
-
-	void Data::RemoveFile() {
-		std::remove(path_to_file.c_str());
-	};
-
+namespace Data {
 	File::File(const std::string& path_to_file, const int size)
-		: Data(path_to_file), path_to_file(path_to_file)
+		: path_to_file(path_to_file)
 	{
 		content.reserve(size);
 	};
@@ -68,6 +54,15 @@ namespace Data
 		return false;
 	};
 
+	void File::CreateFile() {
+		std::fstream file(path_to_file, std::ios::out);
+		file.close();
+	};
+
+	void File::RemoveFile() {
+		std::remove(path_to_file.c_str());
+	};
+
 	bool File::IsDifferent(std::function<std::string(std::string)> un_hash_function) {
 		std::fstream file(path_to_file, std::ios::in);
 		std::string line = "";
@@ -117,5 +112,70 @@ namespace Data
 		std::fstream file(path_to_file, std::ios::out);
 		file << temp;
 		file.close();
+	};
+
+
+
+	Folder::Folder(const std::filesystem::path& path_to_folder)
+		: path_to_folder(path_to_folder) {}
+	
+	void Folder::CreateFolder() {
+		std::filesystem::create_directory(path_to_folder);
+	};
+
+	void Folder::RemoveFolder() {
+		std::filesystem::remove_all(path_to_folder);
+	}
+
+	std::vector<std::string> Folder::GetFilesList() {
+		return files;
+	};
+
+	void Folder::FetchFilesList() {
+		files.clear();
+		for (const auto& entry : std::filesystem::directory_iterator(path_to_folder))
+			files.emplace_back(entry.path().filename().string());
+	}
+
+	size_t Folder::GetFilesCount() {
+		return files.size();
+	};
+
+	void Folder::CreateFile(const std::string& file_name) {
+		std::fstream file((path_to_folder / file_name).string(), std::ios::out);
+		file.close();
+	};
+
+	void Folder::RemoveFile(const std::string& file_name) {
+		std::remove((path_to_folder / file_name).string().c_str());
+	};
+
+	File* Folder::OpenFile(const std::string& file_name) 
+	{ return (new File((path_to_folder / file_name).string())); };
+	 
+	void Folder::CloseFile(File* file) 
+	{ delete file; }
+
+	void Folder::Clean(){
+		RemoveFolder();
+		CreateFolder();
+	};
+
+	bool Folder::Exist() 
+	{ return std::filesystem::exists(path_to_folder); }
+	
+	bool Folder::IsEmpty() {
+		if (std::filesystem::is_empty(path_to_folder)) return true;
+		return false;
+	};
+
+	bool Folder::IsDifferent() {
+		std::vector<std::string> temp;
+		for (const auto& entry : std::filesystem::directory_iterator(path_to_folder))
+			temp.emplace_back(entry.path().filename().string());
+		if (temp.size() != files.size()) return true;
+		for (int i = 0; i < temp.size(); i++)
+			if (temp[i] != files[i]) return true;
+		return false;
 	};
 };

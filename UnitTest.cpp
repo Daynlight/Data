@@ -3,6 +3,53 @@
 UnitTest::UnitTest() {
 	std::cout << "Unit Test Started" << std::endl;
 
+	// Folder
+	Folder_CreateFolderAndRemoveFolder_FolderCreatedAndRemoved("Data1");
+	Folder_CreateFolderAndRemoveFolder_FolderCreatedAndRemoved("Data2");
+	Folder_CreateFolderAndRemoveFolder_FolderCreatedAndRemoved("Data3");
+	Folder_CreateFolderAndRemoveFolder_FolderCreatedAndRemoved("Data4");
+	
+	Folder_CreateAndRemoveFile_FileCreatedAndRemoved("Data1.txt");
+	Folder_CreateAndRemoveFile_FileCreatedAndRemoved("Data2.txt");
+	Folder_CreateAndRemoveFile_FileCreatedAndRemoved("Data3.txt");
+	Folder_CreateAndRemoveFile_FileCreatedAndRemoved("Data4.txt");
+
+	Folder_OpenAndCloseFile_FileOpenedAndClosed("Data1.txt", "Hello World!!!");
+	Folder_OpenAndCloseFile_FileOpenedAndClosed("Data2.txt", "Witaj Świecie!!!");
+	Folder_OpenAndCloseFile_FileOpenedAndClosed("Data3.txt", "Hallo Welt!!!");
+	Folder_OpenAndCloseFile_FileOpenedAndClosed("Data4.txt", "Bonjour le monde!!!");
+
+	Folder_Exist_ExistReturnProperValue("Data1");
+	Folder_Exist_ExistReturnProperValue("Data2");
+	Folder_Exist_ExistReturnProperValue("Data3");
+	Folder_Exist_ExistReturnProperValue("Data4");
+
+	Folder_IsEmpty_ReturnsProperValue("Data1");
+	Folder_IsEmpty_ReturnsProperValue("Data2");
+	Folder_IsEmpty_ReturnsProperValue("Data3");
+	Folder_IsEmpty_ReturnsProperValue("Data4");
+
+	Folder_GetFilesList_FilesListGot({ "file1.txt", "file2.txt", "file3.txt" });
+	Folder_GetFilesList_FilesListGot({ "data1.txt", "data2.txt", "data3.txt" });
+	Folder_GetFilesList_FilesListGot({ "hello1.txt", "hello2.txt", "hello3.txt" });
+	Folder_GetFilesList_FilesListGot({ "world1.txt", "world2.txt", "world3.txt" });
+
+	Folder_IsDifferent_CheckIfFilesAreDifferent({ "file1.txt", "file2.txt", "file3.txt" }, "file4.txt");
+	Folder_IsDifferent_CheckIfFilesAreDifferent({ "data1.txt", "data2.txt", "data3.txt" }, "data4.txt");
+	Folder_IsDifferent_CheckIfFilesAreDifferent({ "hello1.txt", "hello2.txt", "hello3.txt" }, "hello4.txt");
+	Folder_IsDifferent_CheckIfFilesAreDifferent({ "world1.txt", "world2.txt", "world3.txt" }, "world4.txt");
+
+	Folder_GetFilesCount_FilesCountGot({ "file1.txt", "file2.txt", "file3.txt" });
+	Folder_GetFilesCount_FilesCountGot({ "data1.txt", "data2.txt", "data3.txt" , "data4.txt"});
+	Folder_GetFilesCount_FilesCountGot({ "hello1.txt", "hello2.txt", "hello3.txt" , "hello4.txt", "hello5.txt"});
+	Folder_GetFilesCount_FilesCountGot({ "world1.txt", "world2.txt", "world3.txt" , "world4.txt", "world5.txt", "world6.txt"});
+
+	Folder_CleanFolder_FolderCleaned({ "file1.txt", "file2.txt", "file3.txt" });
+	Folder_CleanFolder_FolderCleaned({ "data1.txt", "data2.txt", "data3.txt" });
+	Folder_CleanFolder_FolderCleaned({ "hello1.txt", "hello2.txt", "hello3.txt" });
+	Folder_CleanFolder_FolderCleaned({ "world1.txt", "world2.txt", "world3.txt" });
+
+	// File
 	File_GetSize_SizeReturned(10);
 	File_GetSize_SizeReturned(0);
 	File_GetSize_SizeReturned(100);
@@ -53,9 +100,9 @@ UnitTest::UnitTest() {
 	File_IsEmpty_IsEmptyWorks();
 
 	if (ran == passed)
-		std::cout << "All tests passed" << std::endl;
+		std::cout << passed << "/" << ran << " All tests passed" << std::endl;
 	else
-		std::cout << "Some tests failed" << std::endl;
+		std::cout << passed << "/" << ran << " Some tests failed" << std::endl;
 }
 
 void UnitTest::File_GetSize_SizeReturned(size_t size) {
@@ -223,4 +270,226 @@ void UnitTest::File_FileIsDifferent_FileIsDifferentWorks(std::string data_entry,
 	}
 	else
 		std::cout << "File_FileIsDifferent_FileIsDifferentWorks Failed on p1" << std::endl;
+}
+
+void UnitTest::Folder_CreateFolderAndRemoveFolder_FolderCreatedAndRemoved(std::filesystem::path path) {
+	ran++;
+	// Arrange
+	Data::Folder folder_class = Data::Folder(path);
+	folder_class.RemoveFolder();
+	// Act p1
+	folder_class.CreateFolder();
+	// Assert p1
+	if (std::filesystem::exists(path)) {
+		// Act p2
+		folder_class.RemoveFolder();
+		// Assert p2
+		if (!std::filesystem::exists(path)) {
+			passed++;
+			std::cout << "Folder_CreateFolderAndRemoveFolder_FolderCreatedAndRemoved Passed" << std::endl;
+		}
+		else
+			std::cout << "Folder_CreateFolderAndRemoveFolder_FolderCreatedAndRemoved Failed on p2" << std::endl;
+	}
+	else
+		std::cout << "Folder_CreateFolderAndRemoveFolder_FolderCreatedAndRemoved Failed on p1" << std::endl;
+};
+
+void UnitTest::Folder_CreateAndRemoveFile_FileCreatedAndRemoved(const std::string& file_name) {
+	ran++;
+	// Arrange
+	Data::Folder folder_class = Data::Folder("data");
+	folder_class.CreateFolder();
+	folder_class.RemoveFile(file_name);
+	// Act p1
+	folder_class.CreateFile(file_name);
+	// Assert p1
+	if (std::filesystem::exists("data/" + file_name)) {
+		// Act p2
+		folder_class.RemoveFile(file_name);
+		// Assert p2
+		if (!std::filesystem::exists("data/" + file_name)) {
+			passed++;
+			std::cout << "Folder_CreateAndRemoveFile_FileCreatedAndRemoved Passed" << std::endl;
+		}
+		else
+			std::cout << "Folder_CreateAndRemoveFile_FileCreatedAndRemoved Failed on p2" << std::endl;
+	}
+	else
+		std::cout << "Folder_CreateAndRemoveFile_FileCreatedAndRemoved Failed on p1" << std::endl;
+	// clean up
+	folder_class.RemoveFolder();
+}
+
+void UnitTest::Folder_OpenAndCloseFile_FileOpenedAndClosed(const std::string& file_name, const std::string& data) {
+	ran++;
+	// Arrange
+	Data::Folder folder_class = Data::Folder("data");
+	folder_class.CreateFolder();
+	folder_class.CreateFile(file_name);
+	// Act
+	Data::File* file_class = folder_class.OpenFile(file_name);
+	file_class->Push(data);
+	file_class->Save();
+	file_class->Pop();
+	file_class->Read();
+	// Assert
+	if (std::filesystem::exists("data/" + file_name) && file_class->Size() == 1 && (*file_class)[0] == data) {
+
+		passed++;
+		std::cout << "Folder_OpenAndCloseFile_FileOpenedAndClosed Passed" << std::endl;
+	}
+	else
+		std::cout << "Folder_OpenAndCloseFile_FileOpenedAndClosed Failed on p1" << std::endl;
+	// clean up
+	folder_class.CloseFile(file_class);
+	folder_class.RemoveFolder();
+}
+
+void UnitTest::Folder_Exist_ExistReturnProperValue(std::filesystem::path path) {
+	ran++;
+	// Arrange
+	Data::Folder folder_class = Data::Folder(path);
+	folder_class.RemoveFolder();
+	// Act p1
+	bool exist = folder_class.Exist();
+	// Assert p1
+	if (!exist) {
+		// Act p2
+		folder_class.CreateFolder();
+		exist = folder_class.Exist();
+		if (exist) {
+			passed++;
+			std::cout << "Folder_Exist_ExistReturnProperValue Passed" << std::endl;
+		}
+		else {
+			std::cout << "Folder_Exist_ExistReturnProperValue Failed on p2" << std::endl;
+		}
+	}
+	else {
+		std::cout << "Folder_Exist_ExistReturnProperValue Failed on p1" << std::endl;
+	}
+	// clean up
+	folder_class.RemoveFolder();
+}
+void UnitTest::Folder_IsEmpty_ReturnsProperValue(std::filesystem::path path) {
+	ran++;
+	// Arrange
+	Data::Folder folder_class = Data::Folder(path);
+	folder_class.RemoveFolder();
+	folder_class.CreateFolder();
+	// Act p1
+	bool is_empty = folder_class.IsEmpty();
+	if (is_empty) {
+		// Act p2
+		folder_class.CreateFile("data.txt");
+		is_empty = folder_class.IsEmpty();
+		// Assert p2
+		if (!is_empty) {
+			passed++;
+			std::cout << "Folder_IsEmpty_ReturnsProperValue Passed" << std::endl;
+		}
+		else {
+			std::cout << "Folder_IsEmpty_ReturnsProperValue Failed on p2" << std::endl;
+		}
+	}
+	else {
+		std::cout << "Folder_IsEmpty_ReturnsProperValue Failed on p1" << std::endl;
+	}
+	// clean up
+	folder_class.RemoveFolder();
+}
+
+void UnitTest::Folder_GetFilesList_FilesListGot(std::vector<std::string> inner_files) {
+	ran++;
+	// Arrange
+	Data::Folder folder_class = Data::Folder("data");
+	folder_class.RemoveFolder();
+	folder_class.CreateFolder();
+	sort(inner_files.begin(), inner_files.end());
+	for (const std::string& file : inner_files)
+		folder_class.CreateFile(file);
+	// Act
+	folder_class.FetchFilesList();
+	std::vector<std::string> files = folder_class.GetFilesList();
+	sort(files.begin(), files.end());
+	// Assert
+	if (files.size() == inner_files.size() && files == inner_files) {
+		passed++;
+		std::cout << "Folder_GetFilesList_FilesListGot Passed" << std::endl;
+	}
+	else
+		std::cout << "Folder_GetFilesList_FilesListGot Failed" << std::endl;
+	// clean up
+	folder_class.RemoveFolder();
+}
+void UnitTest::Folder_IsDifferent_CheckIfFilesAreDifferent(std::vector<std::string> inner_files, const std::string& new_file) {
+	ran++;
+	// Arrange
+	Data::Folder folder_class = Data::Folder("data");
+	folder_class.RemoveFolder();
+	folder_class.CreateFolder();
+	for (const std::string& file : inner_files)
+		folder_class.CreateFile(file);
+	// Act p1
+	folder_class.FetchFilesList();
+	bool is_different = folder_class.IsDifferent();
+	// Assert p1
+	if (!is_different) {
+		// Act p2
+		folder_class.CreateFile(new_file);
+		is_different = folder_class.IsDifferent();
+		// Assert p2
+		if (is_different) {
+			passed++;
+			std::cout << "Folder_IsDifferent_CheckIfFilesAreDifferent Passed" << std::endl;
+		}
+		else
+			std::cout << "Folder_IsDifferent_CheckIfFilesAreDifferent Failed on p2" << std::endl;
+	}
+	else 
+		std::cout << "Folder_IsDifferent_CheckIfFilesAreDifferent Failed on p1" << std::endl;
+	// clean up
+	folder_class.RemoveFolder();
+}
+void UnitTest::Folder_GetFilesCount_FilesCountGot(std::vector<std::string> inner_files) {
+	ran++;
+	// Arrange
+	Data::Folder folder_class = Data::Folder("data");
+	folder_class.RemoveFolder();
+	folder_class.CreateFolder();
+	for (const std::string& file : inner_files)
+		folder_class.CreateFile(file);
+	// Act
+	folder_class.FetchFilesList();
+	size_t files_count = folder_class.GetFilesCount();
+	// Assert
+	if (files_count == inner_files.size()) {
+		passed++;
+		std::cout << "Folder_GetFilesCount_FilesCountGot Passed" << std::endl;
+	}
+	else
+		std::cout << "Folder_GetFilesCount_FilesCountGot Failed" << std::endl;
+	// clean up
+	folder_class.RemoveFolder();
+}
+void UnitTest::Folder_CleanFolder_FolderCleaned(std::vector<std::string> inner_files) {
+	ran++;
+	// Arrange
+	Data::Folder folder_class = Data::Folder("data");
+	folder_class.RemoveFolder();
+	folder_class.CreateFolder();
+	for (const std::string& file : inner_files)
+		folder_class.CreateFile(file);
+	// Act
+	folder_class.Clean();
+	// Aseert
+	if (folder_class.IsEmpty()) {
+		passed++;
+		std::cout << "Folder_CleanFolder_FolderCleaned Passed" << std::endl;
+	}
+	else
+		std::cout << "Folder_CleanFolder_FolderCleaned Failed" << std::endl;
+	// clean up
+	folder_class.RemoveFolder();
 };
