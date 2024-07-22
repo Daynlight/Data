@@ -1,4 +1,4 @@
-workspace "MAT-CPP"  
+workspace "DATA-CPP"  
     configurations { "Test" } 
     language "C++"   
     cppdialect "C++20"
