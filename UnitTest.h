@@ -9,7 +9,7 @@ public:
 
 	void Folder_CreateFolderAndRemoveFolder_FolderCreatedAndRemoved(std::filesystem::path path = "data");
 	void Folder_CreateAndRemoveFile_FileCreatedAndRemoved(const std::string& file_name);
-	void Folder_OpenAndCloseFile_FileOpenedAndClosed(const std::string& file_name, const std::string& data);
+	void Folder_OpenFile_FileOpened(const std::string& file_name, const std::string& data);
 	void Folder_Exist_ExistReturnProperValue(std::filesystem::path path = "data");
 	void Folder_IsEmpty_ReturnsProperValue(std::filesystem::path path = "data");
 	void Folder_GetFilesList_FilesListGot(std::vector<std::string> inner_files = { "file1.txt", "file2.txt", "file3.txt" });

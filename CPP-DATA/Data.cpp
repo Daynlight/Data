@@ -150,11 +150,8 @@ namespace Data {
 		std::remove((path_to_folder / file_name).string().c_str());
 	};
 
-	File* Folder::OpenFile(const std::string& file_name) 
-	{ return (new File((path_to_folder / file_name).string())); };
-	 
-	void Folder::CloseFile(File* file) 
-	{ delete file; }
+	std::shared_ptr<Data::File> Folder::OpenFile(const std::string& file_name)
+	{ return std::make_shared<File>((path_to_folder / file_name).string()); };
 
 	void Folder::Clean(){
 		RemoveFolder();

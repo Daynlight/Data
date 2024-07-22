@@ -4,6 +4,7 @@
 #include <fstream>
 #include <vector>
 #include <functional>
+#include <memory>
 
 namespace Data {
 	class File {
@@ -33,8 +34,7 @@ namespace Data {
 		void RemoveFolder();
 		void CreateFile(const std::string& file_name);
 		void RemoveFile(const std::string& file_name);
-		File* OpenFile(const std::string& file_name);
-		void CloseFile(File* file);
+		std::shared_ptr<Data::File> OpenFile(const std::string& file_name);
 		void Clean();
 		bool Exist();
 		bool IsEmpty();

@@ -14,10 +14,10 @@ UnitTest::UnitTest() {
 	Folder_CreateAndRemoveFile_FileCreatedAndRemoved("Data3.txt");
 	Folder_CreateAndRemoveFile_FileCreatedAndRemoved("Data4.txt");
 
-	Folder_OpenAndCloseFile_FileOpenedAndClosed("Data1.txt", "Hello World!!!");
-	Folder_OpenAndCloseFile_FileOpenedAndClosed("Data2.txt", "Witaj Świecie!!!");
-	Folder_OpenAndCloseFile_FileOpenedAndClosed("Data3.txt", "Hallo Welt!!!");
-	Folder_OpenAndCloseFile_FileOpenedAndClosed("Data4.txt", "Bonjour le monde!!!");
+	Folder_OpenFile_FileOpened("Data1.txt", "Hello World!!!");
+	Folder_OpenFile_FileOpened("Data2.txt", "Witaj Świecie!!!");
+	Folder_OpenFile_FileOpened("Data3.txt", "Hallo Welt!!!");
+	Folder_OpenFile_FileOpened("Data4.txt", "Bonjour le monde!!!");
 
 	Folder_Exist_ExistReturnProperValue("Data1");
 	Folder_Exist_ExistReturnProperValue("Data2");
@@ -321,14 +321,14 @@ void UnitTest::Folder_CreateAndRemoveFile_FileCreatedAndRemoved(const std::strin
 	folder_class.RemoveFolder();
 }
 
-void UnitTest::Folder_OpenAndCloseFile_FileOpenedAndClosed(const std::string& file_name, const std::string& data) {
+void UnitTest::Folder_OpenFile_FileOpened(const std::string& file_name, const std::string& data) {
 	ran++;
 	// Arrange
 	Data::Folder folder_class = Data::Folder("data");
 	folder_class.CreateFolder();
 	folder_class.CreateFile(file_name);
 	// Act
-	Data::File* file_class = folder_class.OpenFile(file_name);
+	std::shared_ptr<Data::File> file_class = folder_class.OpenFile(file_name);
 	file_class->Push(data);
 	file_class->Save();
 	file_class->Pop();
@@ -342,7 +342,7 @@ void UnitTest::Folder_OpenAndCloseFile_FileOpenedAndClosed(const std::string& fi
 	else
 		std::cout << "Folder_OpenAndCloseFile_FileOpenedAndClosed Failed on p1" << std::endl;
 	// clean up
-	folder_class.CloseFile(file_class);
+	
 	folder_class.RemoveFolder();
 }
 
