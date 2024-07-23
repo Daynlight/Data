@@ -1,8 +1,8 @@
 #include "UnitTest.h"
-#include "TodoShow.h"
+#include "Show.h"
 
 int main() {
 	//UnitTest test;
-	TodoShow todo;
+	TodoShow();
 	return 0;
 }

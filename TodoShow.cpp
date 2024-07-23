@@ -1,59 +1,61 @@
-#include "TodoShow.h"
+#include "Show.h"
 
-TodoShow::TodoShow()
+void TodoShow()
 {
+	// Init
+	Data::File todo_file("todo.txt");
+	bool running = true;
+
+	// Check if file exist if not create
 	if (todo_file.IsEmpty()) todo_file.CreateFile();
-	while (running)
-	{
-		Loop();
-	};
-}
 
-void TodoShow::Loop()
-{
+	// Load data from file
 	todo_file.Read();
 
-	system("cls");
-	
-	std::cout << "ToDo: " << std::endl;
-	
-	for (int i = 0; i < todo_file.Size(); i++)
-		std::cout << i+1 << ". " << todo_file[i] << std::endl;
-	std::cout << "----------------------\n";
-	std::cout << "1. Add\n" << "2. Done\n" << "3. Remove\n" << "4. Exit\n";
-	int action = 0;
-	std::cout << "Chose Action: ";
-	std::cin >> action;
-	
-	if (action == 1) {
+	// Main app loop
+	while (running) {
+		// Clear terminal
+		system("cls");
+
+		// Show todo list
+		std::cout << "ToDo: " << std::endl;
+		for (int i = 0; i < todo_file.Size(); i++)
+			std::cout << i + 1 << ". " << todo_file[i] << std::endl;
+
+		// Show Menu
+		std::cout << "----------------------\n";
+		std::cout << "1. Add\n" << "2. Done\n" << "3. Remove\n" << "4. Exit\n";
+
+		// Get user action
+		int action = 0;
+		std::cout << "Chose Action: ";
+		std::cin >> action;
+
+		// Run user action
 		std::string name = "";
-		std::cout << "Title: ";
-		std::getline(std::cin >> std::ws, name);
-		Add(name);
-	}
-	else if (action == 2) {
 		int id = 0;
-		std::cout << "Chose id: ";
-		std::cin >> id;
-		if (id <= todo_file.Size()) Done(id - 1);
-	}
-	else if (action == 3) {
-		int id = 0;
-		std::cout << "Chose id: ";
-		std::cin >> id;
-		if(id <= todo_file.Size()) Done(id - 1);
-	}
-	else running = false;
+		switch (action)
+		{
+		case 1: // Add
+			std::cout << "Title: ";
+			std::getline(std::cin >> std::ws, name);
+			todo_file.Push(name);
+			break;
+		case 2: // Done
+			std::cout << "Chose id: ";
+			std::cin >> id;
+			if (id <= todo_file.Size()) todo_file.Pop(id - 1);
+			break;
+		case 3: // Remove
+			std::cout << "Chose id: ";
+			std::cin >> id;
+			if (id <= todo_file.Size()) todo_file.Pop(id - 1);
+			break;
+		default: // Exit
+			running = false;
+		};
 
-	todo_file.Save();
-}
-
-void TodoShow::Add(const std::string& name)
-{
-	todo_file.Push(name);
-}
-
-void TodoShow::Done(const int id)
-{
-	todo_file.Pop(id);
-}
+		// Save changes in file
+		todo_file.Save();
+	};
+};
