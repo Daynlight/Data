@@ -107,7 +107,7 @@ UnitTest::UnitTest() {
 		std::cout << passed << "/" << ran << " Some tests failed" << std::endl;
 	
 	std::cout << "Type any to continue\n";
-	std::cin >> std::ws;
+	std::getchar();
 }
 
 void UnitTest::File_GetSize_SizeReturned(size_t size) {
