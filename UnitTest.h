@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <filesystem>
+#include <thread>
 
 class UnitTest {
 public:
@@ -27,6 +28,7 @@ public:
 	void File_CreateAndRemoveFile_FileCreatedAndRemoved(const std::string& filename);
 	void File_IsEmpty_IsEmptyWorks();
 	void File_FileIsDifferent_FileIsDifferentWorks(std::string data_entry = "Hello", std::string data_change = "World");
+	void File_HashFile_FileHashed(std::string data = "Hello World!!!");
 
 private:
 	unsigned int ran = 0;

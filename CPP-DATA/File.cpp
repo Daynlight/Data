@@ -1,7 +1,7 @@
 #include "File.h"
 
 namespace Data {
-	File::File(const std::string& path_to_file, const int size)
+	File::File(const std::string& path_to_file, size_t size)
 		: path_to_file(path_to_file) {
 		content.reserve(size);
 	};
@@ -16,17 +16,17 @@ namespace Data {
 		return temp;
 	};
 
-	std::string File::Pop(const int& index) {
+	std::string File::Pop(const size_t& index) {
 		std::string temp = content[index];
 		content.erase(content.begin() + index);
 		return temp;
 	};
 
-	void File::Remove(const int& index) {
+	void File::Remove(const size_t& index) {
 		content.erase(content.begin() + index);
 	};
 
-	std::string& File::operator[](const int& index) {
+	std::string& File::operator[](const size_t& index) {
 		return content[index];
 	};
 
@@ -38,7 +38,7 @@ namespace Data {
 		this->path_to_file = path_to_file;
 	};
 
-	void File::Read(std::function<std::string(std::string)> un_hash_function) {
+	void File::Read(Hash* hash) {
 		content.clear();
 
 		std::fstream file(path_to_file, std::ios::in);
@@ -49,9 +49,15 @@ namespace Data {
 			std::getline(file, line);
 
 			if (line != "") {
-				if (un_hash_function) line = un_hash_function(line);
-				for (size_t j = 0; j < line.size(); j = j + 3) {
-					uint8_t line_char = std::stoul(line.substr(j, 3));
+				if (hash) line = hash->un_hash_function(line);
+				for (size_t count_char = 0; count_char < line.size(); count_char = count_char + 3) {
+					uint8_t line_char = 0;
+					try {
+						line_char = std::stoul(line.substr(count_char, 3));
+					}
+					catch (std::exception e) {
+						line_char = 0;
+					};
 					temp += line_char;
 				};
 				content.emplace_back(temp);
@@ -75,7 +81,7 @@ namespace Data {
 		std::remove(path_to_file.c_str());
 	};
 
-	bool File::is_different(std::function<std::string(std::string)> un_hash_function) {
+	bool File::is_different(Hash* hash) {
 		std::fstream file(path_to_file, std::ios::in);
 		std::string line = "", temp = "";
 		size_t count = 0;
@@ -85,9 +91,15 @@ namespace Data {
 			std::getline(file, line);
 
 			if (line != "") {
-				if (un_hash_function) line = un_hash_function(line);
-				for (size_t j = 0; j < line.size(); j = j + 3) {
-					uint8_t line_char = std::stoul(line.substr(j, 3));
+				if (hash) line = hash->un_hash_function(line);
+				for (size_t count_char = 0; count_char < line.size(); count_char = count_char + 3) {
+					uint8_t line_char = 0;
+					try {
+						line_char = std::stoul(line.substr(count_char, 3));
+					}
+					catch (std::exception e) {
+						line_char = 0;
+					};
 					temp += line_char;
 				};
 
@@ -99,7 +111,7 @@ namespace Data {
 		};
 		file.close();
 		return false;
-	}
+	};
 
 	std::vector<std::string>::iterator File::begin() {
 		return content.begin();
@@ -109,7 +121,7 @@ namespace Data {
 		return content.end();
 	};
 
-	void File::Save(std::function<std::string(std::string)> hash_function) {
+	void File::Save(Hash* hash) {
 		std::string line = "", temp = "";
 
 		for (int count_content = 0; count_content < content.size(); count_content++) {
@@ -119,7 +131,7 @@ namespace Data {
 				line += std::to_string(data);
 			};
 
-			if (hash_function && content[count_content] != "") line = hash_function(line);
+			if (hash && content[count_content] != "") line = hash->hash_function(line);
 
 			temp += line;
 			line = "";
@@ -132,4 +144,4 @@ namespace Data {
 		file << temp;
 		file.close();
 	};
-}
+};

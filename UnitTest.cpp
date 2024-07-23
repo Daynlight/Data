@@ -99,6 +99,11 @@ UnitTest::UnitTest() {
 	File_CreateAndRemoveFile_FileCreatedAndRemoved("World.txt");
 	File_CreateAndRemoveFile_FileCreatedAndRemoved("HelloWorld.txt");
 
+	File_HashFile_FileHashed("Hello World!!!");
+	File_HashFile_FileHashed("Witaj Świecie!!!");
+	File_HashFile_FileHashed("Hallo Welt!!!");
+	File_HashFile_FileHashed("Bonjour le monde!!!");
+
 	File_IsEmpty_IsEmptyWorks();
 
 	if (ran == passed)
@@ -306,6 +311,35 @@ void UnitTest::File_FileIsDifferent_FileIsDifferentWorks(std::string data_entry,
 		std::cout << "File_FileIsDifferent_FileIsDifferentWorks Failed on p1" << std::endl;
 }
 
+void UnitTest::File_HashFile_FileHashed(std::string data)
+{
+	ran++;
+	// Arrange
+	Data::File file_class = Data::File("data.txt", 0);
+	file_class.Push(data);
+	Data::BaseHash hash = Data::BaseHash("HelloWorld");
+	Data::BaseHash hash1 = Data::BaseHash("HelloWorld!!!");
+	// Act
+	file_class.Save(&hash);
+	file_class.Read(&hash1);
+	// Assert part 1
+	if (file_class[0] != data && file_class.size() == 1) {
+		// Act part 2
+		file_class.Read(&hash);
+		// Assert part 2
+		if (file_class[0] == data && file_class.size() == 1) {
+			passed++;
+			std::cout << "File_HashFile_FileHashed Passed" << std::endl;
+		}
+		else
+			std::cout << "File_HashFile_FileHashed Failed on p2" << std::endl;
+	}
+	else
+		std::cout << "File_HashFile_FileHashed Failed on p1" << std::endl;
+	// clean up
+	file_class.RemoveFile();
+};
+
 void UnitTest::Folder_CreateFolderAndRemoveFolder_FolderCreatedAndRemoved(std::filesystem::path path) {
 	ran++;
 	// Arrange
@@ -386,12 +420,12 @@ void UnitTest::Folder_Exist_ExistReturnProperValue(std::filesystem::path path) {
 	Data::Folder folder_class = Data::Folder(path);
 	folder_class.RemoveFolder();
 	// Act p1
-	bool exist = folder_class.Exist();
+	bool exist = folder_class.exist();
 	// Assert p1
 	if (!exist) {
 		// Act p2
 		folder_class.CreateFolder();
-		exist = folder_class.Exist();
+		exist = folder_class.exist();
 		if (exist) {
 			passed++;
 			std::cout << "Folder_Exist_ExistReturnProperValue Passed" << std::endl;
@@ -413,11 +447,11 @@ void UnitTest::Folder_IsEmpty_ReturnsProperValue(std::filesystem::path path) {
 	folder_class.RemoveFolder();
 	folder_class.CreateFolder();
 	// Act p1
-	bool is_empty = folder_class.IsEmpty();
+	bool is_empty = folder_class.is_empty();
 	if (is_empty) {
 		// Act p2
 		folder_class.CreateFile("data.txt");
-		is_empty = folder_class.IsEmpty();
+		is_empty = folder_class.is_empty();
 		// Assert p2
 		if (!is_empty) {
 			passed++;
@@ -445,7 +479,7 @@ void UnitTest::Folder_GetFilesList_FilesListGot(std::vector<std::string> inner_f
 		folder_class.CreateFile(file);
 	// Act
 	folder_class.FetchFilesList();
-	std::vector<std::string> files = folder_class.GetFilesList();
+	std::vector<std::string> files = folder_class.files_list();
 	sort(files.begin(), files.end());
 	// Assert
 	if (files.size() == inner_files.size() && files == inner_files) {
@@ -467,12 +501,12 @@ void UnitTest::Folder_IsDifferent_CheckIfFilesAreDifferent(std::vector<std::stri
 		folder_class.CreateFile(file);
 	// Act p1
 	folder_class.FetchFilesList();
-	bool is_different = folder_class.IsDifferent();
+	bool is_different = folder_class.files_list_is_different();
 	// Assert p1
 	if (!is_different) {
 		// Act p2
 		folder_class.CreateFile(new_file);
-		is_different = folder_class.IsDifferent();
+		is_different = folder_class.files_list_is_different();
 		// Assert p2
 		if (is_different) {
 			passed++;
@@ -496,7 +530,7 @@ void UnitTest::Folder_GetFilesCount_FilesCountGot(std::vector<std::string> inner
 		folder_class.CreateFile(file);
 	// Act
 	folder_class.FetchFilesList();
-	size_t files_count = folder_class.GetFilesCount();
+	size_t files_count = folder_class.count();
 	// Assert
 	if (files_count == inner_files.size()) {
 		passed++;
@@ -517,8 +551,8 @@ void UnitTest::Folder_CleanFolder_FolderCleaned(std::vector<std::string> inner_f
 		folder_class.CreateFile(file);
 	// Act
 	folder_class.Clean();
-	// Aseert
-	if (folder_class.IsEmpty()) {
+	// Assert
+	if (folder_class.is_empty()) {
 		passed++;
 		std::cout << "Folder_CleanFolder_FolderCleaned Passed" << std::endl;
 	}

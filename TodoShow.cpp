@@ -1,16 +1,18 @@
 #include "Show.h"
 
-void ToDoShow()
-{
+const inline char* private_key = "MyToDo";
+
+void ToDoShow() {
 	// Init
 	Data::File to_do_file("to_do.txt");
 	bool running = true;
+	Data::BaseHash hash = Data::BaseHash(private_key);
 
 	// Check if file exist if not create
 	if (to_do_file.is_empty()) to_do_file.CreateFile();
 
 	// Load data from file
-	to_do_file.Read();
+	to_do_file.Read(&hash);
 
 	// Main app loop
 	while (running) {
@@ -56,6 +58,6 @@ void ToDoShow()
 		};
 
 		// Save changes in file
-		to_do_file.Save();
+		to_do_file.Save(&hash);
 	};
 };
