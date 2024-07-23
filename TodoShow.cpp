@@ -18,7 +18,7 @@ void TodoShow()
 		system("cls");
 
 		// Show todo list
-		std::cout << "ToDo: " << std::endl;
+		std::cout << "Todo: " << std::endl;
 		for (int i = 0; i < todo_file.Size(); i++)
 			std::cout << i + 1 << ". " << todo_file[i] << std::endl;
 

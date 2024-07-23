@@ -2,7 +2,7 @@
 #include "Show.h"
 
 int main() {
-	//UnitTest test;
+	UnitTest test;
 	TodoShow();
 	return 0;
 }

@@ -8,7 +8,9 @@ namespace Data {
 	};
 
 	void File::Push(std::string data)
-	{ content.emplace_back(data); };
+	{
+		content.emplace_back(data);
+	};
 
 	std::string File::Pop()
 	{
@@ -24,13 +26,19 @@ namespace Data {
 	};
 
 	std::string& File::operator[](int index)
-	{ return content[index]; };
+	{
+		return content[index];
+	};
 
 	size_t File::Size()
-	{ return content.size(); };
+	{
+		return content.size();
+	};
 
 	void File::ChangePathToFile(const std::string& path_to_file)
-	{ this->path_to_file = path_to_file; };
+	{
+		this->path_to_file = path_to_file;
+	};
 
 	void File::Read(std::function<std::string(std::string)> un_hash_function) {
 		content.clear();
@@ -55,9 +63,9 @@ namespace Data {
 		file.close();
 	};
 
-	bool File::IsEmpty(){
+	bool File::IsEmpty() {
 		std::fstream file(path_to_file, std::ios::in);
-		if (file.peek() == std::ifstream::traits_type::eof()) 
+		if (file.peek() == std::ifstream::traits_type::eof())
 			return true;
 		return false;
 	};
@@ -97,6 +105,14 @@ namespace Data {
 		}
 		file.close();
 		return false;
+	}
+
+	std::vector<std::string>::iterator File::begin() {
+		return content.begin();
+	};
+
+	std::vector<std::string>::iterator File::end() {
+		return content.end();
 	};
 
 	void File::Save(std::function<std::string(std::string)> hash_function) {
@@ -126,7 +142,7 @@ namespace Data {
 
 	Folder::Folder(const std::filesystem::path& path_to_folder)
 		: path_to_folder(path_to_folder) {}
-	
+
 	void Folder::CreateFolder() {
 		std::filesystem::create_directory(path_to_folder);
 	};
@@ -159,16 +175,19 @@ namespace Data {
 	};
 
 	std::shared_ptr<Data::File> Folder::OpenFile(const std::string& file_name)
-	{ return std::make_shared<File>((path_to_folder / file_name).string()); };
+	{
+		return std::make_shared<File>((path_to_folder / file_name).string());
+	};
 
-	void Folder::Clean(){
+	void Folder::Clean() {
 		RemoveFolder();
 		CreateFolder();
 	};
 
-	bool Folder::Exist() 
-	{ return std::filesystem::exists(path_to_folder); }
-	
+	bool Folder::Exist() {
+		return std::filesystem::exists(path_to_folder);
+	};
+
 	bool Folder::IsEmpty() {
 		if (std::filesystem::is_empty(path_to_folder)) return true;
 		return false;
@@ -182,5 +201,13 @@ namespace Data {
 		for (int i = 0; i < temp.size(); i++)
 			if (temp[i] != files[i]) return true;
 		return false;
+	};
+
+	std::vector<std::string>::iterator Folder::begin() {
+		return files.begin();
+	};
+
+	std::vector<std::string>::iterator Folder::end() {
+		return files.end();
 	};
 };

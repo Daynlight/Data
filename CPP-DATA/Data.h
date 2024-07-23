@@ -22,7 +22,8 @@ namespace Data {
 		void CreateFile();
 		void RemoveFile();
 		bool IsDifferent(std::function<std::string(std::string)> un_hash_function = nullptr);
-		// [Feature] Add Iterator
+		std::vector<std::string>::iterator begin();
+		std::vector<std::string>::iterator end();
 
 	private:
 		std::vector<std::string> content;
@@ -44,7 +45,8 @@ namespace Data {
 		size_t GetFilesCount();
 		std::vector<std::string> GetFilesList();
 		bool IsDifferent();
-		// [Feature] Add Iterator
+		std::vector<std::string>::iterator begin();
+		std::vector<std::string>::iterator end();
 
 	private:
 		std::vector<std::string> files;
