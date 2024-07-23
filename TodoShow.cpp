@@ -1,26 +1,26 @@
 #include "Show.h"
 
-void TodoShow()
+void ToDoShow()
 {
 	// Init
-	Data::File todo_file("todo.txt");
+	Data::File to_do_file("to_do.txt");
 	bool running = true;
 
 	// Check if file exist if not create
-	if (todo_file.IsEmpty()) todo_file.CreateFile();
+	if (to_do_file.is_empty()) to_do_file.CreateFile();
 
 	// Load data from file
-	todo_file.Read();
+	to_do_file.Read();
 
 	// Main app loop
 	while (running) {
 		// Clear terminal
 		system("cls");
 
-		// Show todo list
-		std::cout << "Todo: " << std::endl;
-		for (int i = 0; i < todo_file.Size(); i++)
-			std::cout << i + 1 << ". " << todo_file[i] << std::endl;
+		// Show to do list
+		std::cout << "To do: " << std::endl;
+		for (int i = 0; i < to_do_file.size(); i++)
+			std::cout << i + 1 << ". " << to_do_file[i] << std::endl;
 
 		// Show Menu
 		std::cout << "----------------------\n";
@@ -39,23 +39,23 @@ void TodoShow()
 		case 1: // Add
 			std::cout << "Title: ";
 			std::getline(std::cin >> std::ws, name);
-			todo_file.Push(name);
+			to_do_file.Push(name);
 			break;
 		case 2: // Done
 			std::cout << "Chose id: ";
 			std::cin >> id;
-			if (id <= todo_file.Size()) todo_file.Pop(id - 1);
+			if (id <= to_do_file.size()) to_do_file.Remove(id - 1);
 			break;
 		case 3: // Remove
 			std::cout << "Chose id: ";
 			std::cin >> id;
-			if (id <= todo_file.Size()) todo_file.Pop(id - 1);
+			if (id <= to_do_file.size()) to_do_file.Remove(id - 1);
 			break;
 		default: // Exit
 			running = false;
 		};
 
 		// Save changes in file
-		todo_file.Save();
+		to_do_file.Save();
 	};
 };

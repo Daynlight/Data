@@ -105,6 +105,9 @@ UnitTest::UnitTest() {
 		std::cout << passed << "/" << ran << " All tests passed" << std::endl;
 	else
 		std::cout << passed << "/" << ran << " Some tests failed" << std::endl;
+	
+	std::cout << "Type any to continue\n";
+	std::cin >> std::ws;
 }
 
 void UnitTest::File_GetSize_SizeReturned(size_t size) {
@@ -115,7 +118,7 @@ void UnitTest::File_GetSize_SizeReturned(size_t size) {
 		file_class.Push("Hello World!!!");
 	}
 	// Act
-	size_t data_size = file_class.Size();
+	size_t data_size = file_class.size();
 	// Assert
 	if (data_size == size) {
 		passed++;
@@ -130,11 +133,13 @@ void UnitTest::File_PushData_DataPushed(std::string data) {
 	// Arrange
 	Data::File file_class = Data::File("data.txt", 0);
 	// Assert p1
-	if (file_class.Size() == 0) {
+	if (file_class.size() == 0) {
 		// Act p2
 		file_class.Push(data);
+		std::string data1 = data;
+		data = "";
 		// Assert p2
-		if (file_class.Size() == 1 && file_class[file_class.Size() - 1] == data) {
+		if (file_class.size() == 1 && file_class[file_class.size() - 1] == data1) {
 			passed++;
 			std::cout << "File_PushData_DataPushed Passed" << std::endl;
 		}
@@ -153,7 +158,7 @@ void UnitTest::File_PopData_DataPopped(std::string data) {
 	// Act
 	std::string popped_data = file_class.Pop();
 	// Assert
-	if (popped_data == data && file_class.Size() == 0) {
+	if (popped_data == data && file_class.size() == 0) {
 		passed++;
 		std::cout << "File_PopData_DataPopped Passed" << std::endl;
 	}
@@ -174,8 +179,8 @@ void UnitTest::File_PopDataAt_DataPoppedAt(std::vector<std::string> data, const 
 	// Assert part 1
 	if (popped_data == data[id]) {
 		bool same = true;
-		if (in_data.size() != file_class.Size()) same = false;
-		for (int i = 0; i < file_class.Size(); i++)
+		if (in_data.size() != file_class.size()) same = false;
+		for (int i = 0; i < file_class.size(); i++)
 			if (file_class[i] != in_data[i]) same = false;
 		if (same) {
 			passed++;
@@ -214,7 +219,7 @@ void UnitTest::File_SaveAndRead_DataSavedAndRead(std::string data) {
 	file_class.Pop();
 	file_class.Read();
 	// Assert
-	if (file_class.Size() == 1 && file_class[0] == data) {
+	if (file_class.size() == 1 && file_class[0] == data) {
 		passed++;
 		std::cout << "File_SaveAndRead_DataSavedAndRead Passed" << std::endl;
 	}
@@ -253,13 +258,13 @@ void UnitTest::File_IsEmpty_IsEmptyWorks() {
 	// Arrange
 	Data::File file_class = Data::File("data.txt", 0);
 	// Act p1
-	bool is_empty = file_class.IsEmpty();
+	bool is_empty = file_class.is_empty();
 	// Assert p1
 	if (is_empty) {
 		// Act p2
 		file_class.Push("Hello World!!!");
 		file_class.Save();
-		is_empty = file_class.IsEmpty();
+		is_empty = file_class.is_empty();
 		// Assert p2
 		if (!is_empty) {
 			passed++;
@@ -282,12 +287,12 @@ void UnitTest::File_FileIsDifferent_FileIsDifferentWorks(std::string data_entry,
 	file_class.Push(data_entry);
 	file_class.Save();
 	// Act p1
-	bool is_different = file_class.IsDifferent();
+	bool is_different = file_class.is_different();
 	// Assert p1
 	if (!is_different) {
 		// Act p2
 		file_class[0] = data_change;
-		is_different = file_class.IsDifferent();
+		is_different = file_class.is_different();
 		// Assert p2
 		if (is_different) {
 			passed++;
@@ -363,7 +368,7 @@ void UnitTest::Folder_OpenFile_FileOpened(const std::string& file_name, const st
 	file_class->Pop();
 	file_class->Read();
 	// Assert
-	if (std::filesystem::exists("data/" + file_name) && file_class->Size() == 1 && (*file_class)[0] == data) {
+	if (std::filesystem::exists("data/" + file_name) && file_class->size() == 1 && (*file_class)[0] == data) {
 
 		passed++;
 		std::cout << "Folder_OpenAndCloseFile_FileOpenedAndClosed Passed" << std::endl;
