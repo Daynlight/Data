@@ -18,7 +18,17 @@ rm -r build/
 
 mkdir prodRelease
 cd prodRelease
-git clone -b Release
+git clone -b Release https://github.com/Daynlight/CPP-Data .
 cd ..
 
 cp -r CPP-DATA/* prodRelease/
+
+cd prodLib
+git add .
+git commit -am "Update Lib from build.sh"
+cd ..
+
+cd prodRelease
+git add .
+git commit -am "Update Release from build.sh"
+cd ..
