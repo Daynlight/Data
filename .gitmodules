@@ -1,0 +1,4 @@
+[submodule "CPP-DATA/SQLite"]
+	path = CPP-DATA/SQLite
+	url = https://github.com/Daynlight/SQLite
+	branch = Lib
