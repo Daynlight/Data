@@ -3,3 +3,5 @@ Test/
 bin/
 *.vcxproj*
 *.sln
+*.make
+Makefile
