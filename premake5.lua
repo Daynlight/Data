@@ -20,7 +20,7 @@ project "Test"
 
 project "CPP-DATA"
     kind "StaticLib"
-    files { "CPP-DATA/**.h", "CPP-DATA/**.cpp" }
+    files { "CPP-DATA/**.h", "CPP-DATA/**.cpp", "CPP-DATA/**.c" }
 
     filter "configurations:Test"
         defines { "Test" }  
