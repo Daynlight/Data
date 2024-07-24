@@ -1,5 +1,9 @@
 git submodule update --remote
 
 cmake .
+cmake --build . --config Debug
+cmake --build . --config Release
 
-start "" "DATA-CPP.sln"
+start "" "Main.sln"
+
+exit ""
