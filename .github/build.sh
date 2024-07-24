@@ -19,9 +19,11 @@ rm -r build/
 mkdir prodRelease
 cd prodRelease
 git clone -b Release https://github.com/Daynlight/CPP-Data .
+git submodule add -b Lib https://github.com/Daynlight/SQLite SQLite
 cd ..
 
 cp -r CPP-DATA/* prodRelease/
+cp LICENSE prodRelease/LICENSE
 
 cd prodLib
 git add .
