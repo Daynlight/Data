@@ -5,3 +5,6 @@ bin/
 *.sln
 *.make
 Makefile
+*.cmake
+CMakeFiles/
+CMakeCache.txt
