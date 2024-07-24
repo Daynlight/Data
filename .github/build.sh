@@ -30,9 +30,6 @@ git commit -am "Update Lib from build.sh"
 cd ..
 
 cd prodRelease
-rm -r SQLite
-mkdir SQLite
-cp -r ../CPP-DATA/SQLite/* SQLite/
 git add .
 git commit -am "Update Release from build.sh"
 cd ..
