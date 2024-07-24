@@ -19,7 +19,6 @@ rm -r build/
 mkdir prodRelease
 cd prodRelease
 git clone -b Release https://github.com/Daynlight/CPP-Data .
-git submodule add -b Lib https://github.com/Daynlight/SQLite SQLite
 cd ..
 
 cp -r CPP-DATA/* prodRelease/
@@ -31,6 +30,9 @@ git commit -am "Update Lib from build.sh"
 cd ..
 
 cd prodRelease
+rm -r SQLite
+mkdir SQLite
+cp -r ../CPP-DATA/SQLite/* SQLite/
 git add .
 git commit -am "Update Release from build.sh"
 cd ..
