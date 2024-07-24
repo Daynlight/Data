@@ -4,7 +4,7 @@ const inline char* private_key = "MyToDo";
 
 void ToDoShow() {
 	// Init
-	Data::File to_do_file("to_do.txt");
+	Data::File to_do_file("showcasefolder/to_do.txt");
 	bool running = true;
 	Data::BaseHash hash = Data::BaseHash(private_key);
 

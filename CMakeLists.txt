@@ -12,8 +12,8 @@ set(CMAKE_CXX_STANDARD 20)
 
 file(GLOB_RECURSE MainFiles "Main/*.cpp" "Main/*.h")
 
-target_link_libraries(Main PRIVATE CPP-DATA)
-
 add_executable(Main ${MainFiles})
+
+target_link_libraries(Main PRIVATE CPP-DATA)
 
 set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT Main)
