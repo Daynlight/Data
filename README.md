@@ -6,7 +6,7 @@
 This is Easy Lib for Saving, Loading, Managing Data and Files <3
 
 <h2>📃Usage📃</h2>
-1. Download And Include Header File<br>
+1. Download Tag add Files to project And Include Header File<br>
 Array:<br>
 2.1 Create<br>
 <code>Data::Array [ClassName] = Data::Array({Path}, {Size});</code></br>
