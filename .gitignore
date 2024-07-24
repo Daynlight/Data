@@ -8,3 +8,5 @@ Makefile
 *.cmake
 CMakeFiles/
 CMakeCache.txt
+Debug/
+Release/
