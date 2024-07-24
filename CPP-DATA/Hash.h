@@ -14,6 +14,7 @@ namespace Data
 		BaseHash(const char* hash_key);
 		std::string hash_function(std::string data);
 		std::string un_hash_function(std::string data);
+
 	private:
 		const char* hash_key;
 	};
