@@ -1,8 +1,4 @@
 mkdir prod
-cd prod
-git clone https://github.com/Daynlight/CPP-Data
-git checkout Lib
-cd ..
 
 git submodule update --remote
 mkdir build
