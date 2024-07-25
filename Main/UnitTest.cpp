@@ -120,7 +120,7 @@ void UnitTest::File_GetSize_SizeReturned(size_t size) {
 	// Arrange
 	Data::File file_class = Data::File("data.txt", size);
 	for (size_t i = 0; i < size; i++) {
-		file_class.Push("Hello World!!!");
+		file_class.push("Hello World!!!");
 	}
 	// Act
 	size_t data_size = file_class.size();
@@ -140,7 +140,7 @@ void UnitTest::File_PushData_DataPushed(std::string data) {
 	// Assert p1
 	if (file_class.size() == 0) {
 		// Act p2
-		file_class.Push(data);
+		file_class.push(data);
 		std::string data1 = data;
 		data = "";
 		// Assert p2
@@ -159,9 +159,9 @@ void UnitTest::File_PopData_DataPopped(std::string data) {
 	ran++;
 	// Arrange
 	Data::File file_class = Data::File("data.txt", 0);
-	file_class.Push(data);
+	file_class.push(data);
 	// Act
-	std::string popped_data = file_class.Pop();
+	std::string popped_data = file_class.pop();
 	// Assert
 	if (popped_data == data && file_class.size() == 0) {
 		passed++;
@@ -176,11 +176,11 @@ void UnitTest::File_PopDataAt_DataPoppedAt(std::vector<std::string> data, const 
 	// Arrange
 	Data::File file_class = Data::File("data.txt", 0);
 	for (const std::string& d : data)
-		file_class.Push(d);
+		file_class.push(d);
 	std::vector<std::string> in_data = data;
 	in_data.erase(in_data.begin() + id);
 	// Act
-	std::string popped_data = file_class.Pop(id);
+	std::string popped_data = file_class.pop(id);
 	// Assert part 1
 	if (popped_data == data[id]) {
 		bool same = true;
@@ -202,7 +202,7 @@ void UnitTest::File_ManageData_DataManaged(std::string data_entry, std::string d
 	ran++;
 	// Arrange
 	Data::File file_class = Data::File("data.txt", 0);
-	file_class.Push(data_entry);
+	file_class.push(data_entry);
 	// Act
 	file_class[0] = data_change;
 	// Assert
@@ -218,11 +218,11 @@ void UnitTest::File_SaveAndRead_DataSavedAndRead(std::string data) {
 	ran++;
 	// Arrange
 	Data::File file_class = Data::File("data.txt", 0);
-	file_class.Push(data);
+	file_class.push(data);
 	// Act
-	file_class.Save();
-	file_class.Pop();
-	file_class.Read();
+	file_class.save();
+	file_class.pop();
+	file_class.read();
 	// Assert
 	if (file_class.size() == 1 && file_class[0] == data) {
 		passed++;
@@ -231,7 +231,7 @@ void UnitTest::File_SaveAndRead_DataSavedAndRead(std::string data) {
 	else
 		std::cout << "File_SaveAndRead_DataSavedAndRead Failed" << std::endl;
 	// clean up
-	file_class.RemoveFile();
+	file_class.removeFile();
 }
 
 void UnitTest::File_CreateAndRemoveFile_FileCreatedAndRemoved(const std::string& filename) {
@@ -239,11 +239,11 @@ void UnitTest::File_CreateAndRemoveFile_FileCreatedAndRemoved(const std::string&
 	// Arrange
 	Data::File file_class = Data::File(filename, 0);
 	// Act p1 
-	file_class.CreateFile();
+	file_class.createFile();
 	// Assert p1
 	if (std::filesystem::exists(filename)) {
 		// Act p2
-		file_class.RemoveFile();
+		file_class.removeFile();
 		// Assert p2
 		if (!std::filesystem::exists(filename)) {
 			passed++;
@@ -255,7 +255,7 @@ void UnitTest::File_CreateAndRemoveFile_FileCreatedAndRemoved(const std::string&
 	else
 		std::cout << "File_CreateAndRemoveFile_FileCreatedAndRemoved Failed p1" << std::endl;
 	// clean up
-	file_class.RemoveFile();
+	file_class.removeFile();
 };
 
 void UnitTest::File_IsEmpty_IsEmptyWorks() {
@@ -263,13 +263,13 @@ void UnitTest::File_IsEmpty_IsEmptyWorks() {
 	// Arrange
 	Data::File file_class = Data::File("data.txt", 0);
 	// Act p1
-	bool is_empty = file_class.is_empty();
+	bool is_empty = file_class.isEmpty();
 	// Assert p1
 	if (is_empty) {
 		// Act p2
-		file_class.Push("Hello World!!!");
-		file_class.Save();
-		is_empty = file_class.is_empty();
+		file_class.push("Hello World!!!");
+		file_class.save();
+		is_empty = file_class.isEmpty();
 		// Assert p2
 		if (!is_empty) {
 			passed++;
@@ -282,22 +282,22 @@ void UnitTest::File_IsEmpty_IsEmptyWorks() {
 	else
 		std::cout << "File_IsEmpty_IsEmptyWorks Failed on p1" << std::endl;
 	// clean up
-	file_class.RemoveFile();
+	file_class.removeFile();
 }
 
 void UnitTest::File_FileIsDifferent_FileIsDifferentWorks(std::string data_entry, std::string data_change) {
 	ran++;
 	// Arrange
 	Data::File file_class = Data::File("data.txt", 0);
-	file_class.Push(data_entry);
-	file_class.Save();
+	file_class.push(data_entry);
+	file_class.save();
 	// Act p1
-	bool is_different = file_class.is_different();
+	bool is_different = file_class.isDifferent();
 	// Assert p1
 	if (!is_different) {
 		// Act p2
 		file_class[0] = data_change;
-		is_different = file_class.is_different();
+		is_different = file_class.isDifferent();
 		// Assert p2
 		if (is_different) {
 			passed++;
@@ -316,16 +316,16 @@ void UnitTest::File_HashFile_FileHashed(std::string data)
 	ran++;
 	// Arrange
 	Data::File file_class = Data::File("data.txt", 0);
-	file_class.Push(data);
+	file_class.push(data);
 	Data::BaseHash hash = Data::BaseHash("HelloWorld");
 	Data::BaseHash hash1 = Data::BaseHash("HelloWorld!!!");
 	// Act
-	file_class.Save(&hash);
-	file_class.Read(&hash1);
+	file_class.save(&hash);
+	file_class.read(&hash1);
 	// Assert part 1
 	if (file_class[0] != data && file_class.size() == 1) {
 		// Act part 2
-		file_class.Read(&hash);
+		file_class.read(&hash);
 		// Assert part 2
 		if (file_class[0] == data && file_class.size() == 1) {
 			passed++;
@@ -337,20 +337,20 @@ void UnitTest::File_HashFile_FileHashed(std::string data)
 	else
 		std::cout << "File_HashFile_FileHashed Failed on p1" << std::endl;
 	// clean up
-	file_class.RemoveFile();
+	file_class.removeFile();
 };
 
 void UnitTest::Folder_CreateFolderAndRemoveFolder_FolderCreatedAndRemoved(std::filesystem::path path) {
 	ran++;
 	// Arrange
 	Data::Folder folder_class = Data::Folder(path);
-	folder_class.RemoveFolder();
+	folder_class.removeFolder();
 	// Act p1
-	folder_class.CreateFolder();
+	folder_class.createFolder();
 	// Assert p1
 	if (std::filesystem::exists(path)) {
 		// Act p2
-		folder_class.RemoveFolder();
+		folder_class.removeFolder();
 		// Assert p2
 		if (!std::filesystem::exists(path)) {
 			passed++;
@@ -367,14 +367,14 @@ void UnitTest::Folder_CreateAndRemoveFile_FileCreatedAndRemoved(const std::strin
 	ran++;
 	// Arrange
 	Data::Folder folder_class = Data::Folder("data");
-	folder_class.CreateFolder();
-	folder_class.RemoveFile(file_name);
+	folder_class.createFolder();
+	folder_class.removeFile(file_name);
 	// Act p1
-	folder_class.CreateFile(file_name);
+	folder_class.createFile(file_name);
 	// Assert p1
 	if (std::filesystem::exists("data/" + file_name)) {
 		// Act p2
-		folder_class.RemoveFile(file_name);
+		folder_class.removeFile(file_name);
 		// Assert p2
 		if (!std::filesystem::exists("data/" + file_name)) {
 			passed++;
@@ -386,23 +386,23 @@ void UnitTest::Folder_CreateAndRemoveFile_FileCreatedAndRemoved(const std::strin
 	else
 		std::cout << "Folder_CreateAndRemoveFile_FileCreatedAndRemoved Failed on p1" << std::endl;
 	// clean up
-	folder_class.RemoveFolder();
+	folder_class.removeFolder();
 }
 
 void UnitTest::Folder_OpenFile_FileOpened(const std::string& file_name, const std::string& data) {
 	ran++;
 	// Arrange
-	Data::Folder folder_class = Data::Folder("data");
-	folder_class.CreateFolder();
-	folder_class.CreateFile(file_name);
+	Data::Folder c_folder_class = Data::Folder("data");
+	c_folder_class.createFolder();
+	c_folder_class.createFile(file_name);
 	// Act
-	std::shared_ptr<Data::File> file_class = folder_class.OpenFile(file_name);
-	file_class->Push(data);
-	file_class->Save();
-	file_class->Pop();
-	file_class->Read();
+	std::shared_ptr<Data::File> c_file_class = c_folder_class.openFile(file_name);
+	c_file_class->push(data);
+	c_file_class->save();
+	c_file_class->pop();
+	c_file_class->read();
 	// Assert
-	if (std::filesystem::exists("data/" + file_name) && file_class->size() == 1 && (*file_class)[0] == data) {
+	if (std::filesystem::exists("data/" + file_name) && c_file_class->size() == 1 && (*c_file_class)[0] == data) {
 
 		passed++;
 		std::cout << "Folder_OpenAndCloseFile_FileOpenedAndClosed Passed" << std::endl;
@@ -411,20 +411,20 @@ void UnitTest::Folder_OpenFile_FileOpened(const std::string& file_name, const st
 		std::cout << "Folder_OpenAndCloseFile_FileOpenedAndClosed Failed on p1" << std::endl;
 	// clean up
 	
-	folder_class.RemoveFolder();
+	c_folder_class.removeFolder();
 }
 
 void UnitTest::Folder_Exist_ExistReturnProperValue(std::filesystem::path path) {
 	ran++;
 	// Arrange
 	Data::Folder folder_class = Data::Folder(path);
-	folder_class.RemoveFolder();
+	folder_class.removeFolder();
 	// Act p1
 	bool exist = folder_class.exist();
 	// Assert p1
 	if (!exist) {
 		// Act p2
-		folder_class.CreateFolder();
+		folder_class.createFolder();
 		exist = folder_class.exist();
 		if (exist) {
 			passed++;
@@ -438,20 +438,20 @@ void UnitTest::Folder_Exist_ExistReturnProperValue(std::filesystem::path path) {
 		std::cout << "Folder_Exist_ExistReturnProperValue Failed on p1" << std::endl;
 	}
 	// clean up
-	folder_class.RemoveFolder();
+	folder_class.removeFolder();
 }
 void UnitTest::Folder_IsEmpty_ReturnsProperValue(std::filesystem::path path) {
 	ran++;
 	// Arrange
 	Data::Folder folder_class = Data::Folder(path);
-	folder_class.RemoveFolder();
-	folder_class.CreateFolder();
+	folder_class.removeFolder();
+	folder_class.createFolder();
 	// Act p1
-	bool is_empty = folder_class.is_empty();
+	bool is_empty = folder_class.isEmpty();
 	if (is_empty) {
 		// Act p2
-		folder_class.CreateFile("data.txt");
-		is_empty = folder_class.is_empty();
+		folder_class.createFile("data.txt");
+		is_empty = folder_class.isEmpty();
 		// Assert p2
 		if (!is_empty) {
 			passed++;
@@ -465,21 +465,21 @@ void UnitTest::Folder_IsEmpty_ReturnsProperValue(std::filesystem::path path) {
 		std::cout << "Folder_IsEmpty_ReturnsProperValue Failed on p1" << std::endl;
 	}
 	// clean up
-	folder_class.RemoveFolder();
+	folder_class.removeFolder();
 }
 
 void UnitTest::Folder_GetFilesList_FilesListGot(std::vector<std::string> inner_files) {
 	ran++;
 	// Arrange
 	Data::Folder folder_class = Data::Folder("data");
-	folder_class.RemoveFolder();
-	folder_class.CreateFolder();
+	folder_class.removeFolder();
+	folder_class.createFolder();
 	sort(inner_files.begin(), inner_files.end());
 	for (const std::string& file : inner_files)
-		folder_class.CreateFile(file);
+		folder_class.createFile(file);
 	// Act
-	folder_class.FetchFilesList();
-	std::vector<std::string> files = folder_class.files_list();
+	folder_class.fetchFilesList();
+	std::vector<std::string> files = folder_class.filesList();
 	sort(files.begin(), files.end());
 	// Assert
 	if (files.size() == inner_files.size() && files == inner_files) {
@@ -489,24 +489,24 @@ void UnitTest::Folder_GetFilesList_FilesListGot(std::vector<std::string> inner_f
 	else
 		std::cout << "Folder_GetFilesList_FilesListGot Failed" << std::endl;
 	// clean up
-	folder_class.RemoveFolder();
+	folder_class.removeFolder();
 }
 void UnitTest::Folder_IsDifferent_CheckIfFilesAreDifferent(std::vector<std::string> inner_files, const std::string& new_file) {
 	ran++;
 	// Arrange
 	Data::Folder folder_class = Data::Folder("data");
-	folder_class.RemoveFolder();
-	folder_class.CreateFolder();
+	folder_class.removeFolder();
+	folder_class.createFolder();
 	for (const std::string& file : inner_files)
-		folder_class.CreateFile(file);
+		folder_class.createFile(file);
 	// Act p1
-	folder_class.FetchFilesList();
-	bool is_different = folder_class.files_list_is_different();
+	folder_class.fetchFilesList();
+	bool is_different = folder_class.filesListIsDifferent();
 	// Assert p1
 	if (!is_different) {
 		// Act p2
-		folder_class.CreateFile(new_file);
-		is_different = folder_class.files_list_is_different();
+		folder_class.createFile(new_file);
+		is_different = folder_class.filesListIsDifferent();
 		// Assert p2
 		if (is_different) {
 			passed++;
@@ -518,18 +518,18 @@ void UnitTest::Folder_IsDifferent_CheckIfFilesAreDifferent(std::vector<std::stri
 	else 
 		std::cout << "Folder_IsDifferent_CheckIfFilesAreDifferent Failed on p1" << std::endl;
 	// clean up
-	folder_class.RemoveFolder();
+	folder_class.removeFolder();
 }
 void UnitTest::Folder_GetFilesCount_FilesCountGot(std::vector<std::string> inner_files) {
 	ran++;
 	// Arrange
 	Data::Folder folder_class = Data::Folder("data");
-	folder_class.RemoveFolder();
-	folder_class.CreateFolder();
+	folder_class.removeFolder();
+	folder_class.createFolder();
 	for (const std::string& file : inner_files)
-		folder_class.CreateFile(file);
+		folder_class.createFile(file);
 	// Act
-	folder_class.FetchFilesList();
+	folder_class.fetchFilesList();
 	size_t files_count = folder_class.count();
 	// Assert
 	if (files_count == inner_files.size()) {
@@ -539,25 +539,25 @@ void UnitTest::Folder_GetFilesCount_FilesCountGot(std::vector<std::string> inner
 	else
 		std::cout << "Folder_GetFilesCount_FilesCountGot Failed" << std::endl;
 	// clean up
-	folder_class.RemoveFolder();
+	folder_class.removeFolder();
 }
 void UnitTest::Folder_CleanFolder_FolderCleaned(std::vector<std::string> inner_files) {
 	ran++;
 	// Arrange
 	Data::Folder folder_class = Data::Folder("data");
-	folder_class.RemoveFolder();
-	folder_class.CreateFolder();
+	folder_class.removeFolder();
+	folder_class.createFolder();
 	for (const std::string& file : inner_files)
-		folder_class.CreateFile(file);
+		folder_class.createFile(file);
 	// Act
-	folder_class.Clean();
+	folder_class.clean();
 	// Assert
-	if (folder_class.is_empty()) {
+	if (folder_class.isEmpty()) {
 		passed++;
 		std::cout << "Folder_CleanFolder_FolderCleaned Passed" << std::endl;
 	}
 	else
 		std::cout << "Folder_CleanFolder_FolderCleaned Failed" << std::endl;
 	// clean up
-	folder_class.RemoveFolder();
+	folder_class.removeFolder();
 };

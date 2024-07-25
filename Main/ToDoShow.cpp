@@ -1,18 +1,19 @@
 #include "Show.h"
 
-const inline char* private_key = "MyToDo";
+// globals
+const inline char* g_private_key = "MyToDo";
 
 void ToDoShow() {
 	// Init
-	Data::File to_do_file("to_do_show.txt");
+	Data::File c_to_do_file("to_do_show.txt");
 	bool running = true;
-	Data::BaseHash hash = Data::BaseHash(private_key);
+	Data::BaseHash c_hash = Data::BaseHash(g_private_key);
 
 	// Check if file exist if not create
-	if (to_do_file.is_empty()) to_do_file.CreateFile();
+	if (c_to_do_file.isEmpty()) c_to_do_file.createFile();
 
 	// Load data from file
-	to_do_file.Read(&hash);
+	c_to_do_file.read(&c_hash);
 
 	// Main app loop
 	while (running) {
@@ -21,12 +22,16 @@ void ToDoShow() {
 
 		// Show to do list
 		std::cout << "To do: " << std::endl;
-		for (int i = 0; i < to_do_file.size(); i++)
-			std::cout << i + 1 << ". " << to_do_file[i] << std::endl;
+		for (int index = 0; index < c_to_do_file.size(); index++)
+			std::cout << index + 1 << ". " << c_to_do_file[index] << std::endl;
 
 		// Show Menu
 		std::cout << "----------------------\n";
-		std::cout << "1. Add\n" << "2. Done\n" << "3. Remove\n" << "4. Exit\n";
+		std::cout 
+			<< "1. Add\n" 
+			<< "2. Done\n" 
+			<< "3. Remove\n" 
+			<< "4. Exit\n";
 
 		// Get user action
 		int action = 0;
@@ -41,23 +46,23 @@ void ToDoShow() {
 		case 1: // Add
 			std::cout << "Title: ";
 			std::getline(std::cin >> std::ws, name);
-			to_do_file.Push(name);
+			c_to_do_file.push(name);
 			break;
 		case 2: // Done
 			std::cout << "Chose id: ";
 			std::cin >> id;
-			if (id <= to_do_file.size()) to_do_file.Remove(id - 1);
+			if (id <= c_to_do_file.size()) c_to_do_file.remove(id - 1);
 			break;
 		case 3: // Remove
 			std::cout << "Chose id: ";
 			std::cin >> id;
-			if (id <= to_do_file.size()) to_do_file.Remove(id - 1);
+			if (id <= c_to_do_file.size()) c_to_do_file.remove(id - 1);
 			break;
 		default: // Exit
 			running = false;
 		};
 
 		// Save changes in file
-		to_do_file.Save(&hash);
+		c_to_do_file.save(&c_hash);
 	};
 };
