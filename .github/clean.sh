@@ -1,8 +1,15 @@
-cd ..
+result=${PWD##*/}
+result=${result:-/}
+
+if [ "$result" == ".github" ]; then
+    cd ..
+fi
 
 git clean -xfd
-rm -r -y -f build/
-rm -r -y -f prodLib/
-rm -r -y -f prodRelease/
+rm -rf build/
+rm -rf prodLib/
+rm -rf prodRelease/
 
-cd .github
+if [ "$result" == ".github" ]; then
+    cd .github
+fi

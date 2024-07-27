@@ -1,5 +1,9 @@
-cd ..
+result=${PWD##*/}
+result=${result:-/}
 
+if [ "$result" == ".github" ]; then
+    cd ..
+fi
 mkdir prodLib
 cd prodLib
 git clone -b Lib https://github.com/Daynlight/CPP-Data .
@@ -36,4 +40,6 @@ git add .
 git commit -am "Update Release from build.sh"
 cd ..
 
-cd .github
+if [ "$result" == ".github" ]; then
+    cd .github
+fi

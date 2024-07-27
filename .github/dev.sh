@@ -1,4 +1,9 @@
-cd ..
+result=${PWD##*/}
+result=${result:-/}
+
+if [ "$result" == ".github" ]; then
+    cd ..
+fi
 
 git submodule update --remote
 
@@ -8,6 +13,8 @@ cmake --build . --config Release
 
 start "" "Main.sln"
 
-cd .github
+if [ "$result" == ".github" ]; then
+    cd .github
+fi
 
 exit 0
