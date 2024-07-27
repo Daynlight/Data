@@ -1,8 +1,8 @@
 cd ..
 
 git clean -xfd
-rm -r -y build/
-rm -r -y prodLib/
-rm -r -y prodRelease/
+rm -r -y -f build/
+rm -r -y -f prodLib/
+rm -r -y -f prodRelease/
 
 cd .github
