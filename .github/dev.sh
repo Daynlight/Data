@@ -10,4 +10,4 @@ start "" "Main.sln"
 
 cd .github
 
-exit ""
+exit 0
