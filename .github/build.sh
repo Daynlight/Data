@@ -1,3 +1,5 @@
+cd ..
+
 mkdir prodLib
 cd prodLib
 git clone -b Lib https://github.com/Daynlight/CPP-Data .
@@ -33,3 +35,5 @@ cd prodRelease
 git add .
 git commit -am "Update Release from build.sh"
 cd ..
+
+cd .github
