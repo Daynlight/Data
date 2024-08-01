@@ -1,13 +1,18 @@
 #include "Show.h"
 
-// globals
-const inline char* g_private_key = "MyToDo";
-
 void ToDoShow() {
 	// Init
 	Data::File c_to_do_file("to_do_show.txt");
 	bool running = true;
-	Data::BaseHash c_hash = Data::BaseHash(g_private_key);
+
+	// Get Password
+	std::string hash_key = "asdha7676dahsdbnbasd678asdakjhasd";
+	std::string password = "";
+	std::cout << "Password: ";
+	std::cin >> password;
+	for (size_t index = 0; index < password.size(); index++)
+		hash_key[index] = hash_key[index] + password[index];
+	Data::BaseHash c_hash = Data::BaseHash(hash_key.c_str());
 
 	// Check if file exist if not create
 	if (c_to_do_file.isEmpty()) c_to_do_file.createFile();

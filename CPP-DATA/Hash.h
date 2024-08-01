@@ -27,7 +27,7 @@ namespace Data {
 		std::string un_hash_function(std::string data);
 
 	private:
-		const char* hash_key;
+		const char* hash_key = "ashduia767asd8hsd76a8sdauhdjasd767asd";
 	};
 
 	// [FEATURE] Add more hash functions
