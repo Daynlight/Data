@@ -4,11 +4,8 @@ result=${result:-/}
 if [ "$result" == ".github" ]; then
     cd ..
 fi
-mkdir prodLib
-cd prodLib
-git clone -b Lib https://github.com/Daynlight/CPP-Data .
-cd ..
 
+mkdir prodLib
 git submodule update --remote
 mkdir build
 cd build
@@ -16,29 +13,15 @@ cmake ..
 cmake --build . --config Release
 cd ..
 
-cp build/Release/CPP-DATA.lib prodLib/Data.lib
-cp CPP-DATA/Data.h prodLib/Data.h
+cp build/Release/Data.lib prodLib/Data.lib
+cp Data/*.h prodLib/*.h
 cp LICENSE prodLib/LICENSE
 
 rm -r build/
 
 mkdir prodRelease
-cd prodRelease
-git clone -b Release https://github.com/Daynlight/CPP-Data .
-cd ..
-
-cp -r CPP-DATA/* prodRelease/
+cp -r Data/* prodRelease/
 cp LICENSE prodRelease/LICENSE
-
-cd prodLib
-git add .
-git commit -am "Update Lib from build.sh"
-cd ..
-
-cd prodRelease
-git add .
-git commit -am "Update Release from build.sh"
-cd ..
 
 if [ "$result" == ".github" ]; then
     cd .github
