@@ -1,8 +1,0 @@
-[submodule "CPP-DATA/SQLite"]
-	path = CPP-DATA/SQLite
-	url = https://github.com/Daynlight/SQLite
-	branch = Lib
-[submodule "CPP-DATA/MySQL"]
-	path = CPP-DATA/MySQL
-	url = https://github.com/mysql/mysql-connector-cpp
-	branch = 8.0
