@@ -30,6 +30,7 @@ namespace Data {
 		void fetchFilesList(); // [FEATURE] Optimize this function
 		// [FEATURE] fetchFilesListAsync
 		void updateList();
+		bool fileExist(const std::string& file_name);
 		std::shared_ptr<Data::File> openFile(const std::string& file_name);
 		void clean();
 		std::vector<std::string>::iterator begin();

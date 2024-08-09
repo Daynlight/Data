@@ -34,7 +34,7 @@ namespace Data {
 		// [FEATURE] Thread saveAsync
 		void read(i_Hash* hash = nullptr); // [FEATURE] simplify this function, optimize and un hash whole file
 		// [FEATURE] Thread readAsync
-		std::string& operator[](const size_t& index);
+		std::string& operator[](const size_t& index); // [FEATURE] Add for -> ptr variant
 		std::vector<std::string>::iterator begin();
 		std::vector<std::string>::iterator end();
 

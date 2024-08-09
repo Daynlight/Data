@@ -25,6 +25,12 @@ namespace Data {
 	void Folder::updateList() {
 		if (filesListIsDifferent()) 
 			fetchFilesList();
+	}
+	bool Folder::fileExist(const std::string& file_name) {
+		bool file_exist = false;
+		for (std::string& file : files)
+			if (file == file_name) file_exist = true;
+		return file_exist;
 	};
 
 	size_t Folder::count() {
