@@ -2,7 +2,7 @@
 
 void ToDoShow() {
 	// Init
-	Data::File c_to_do_file("to_do_show.txt");
+	Data::File c_to_do_file("showdata/to_do_show.txt");
 	bool running = true;
 
 	// Get Password

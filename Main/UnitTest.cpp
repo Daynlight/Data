@@ -366,17 +366,17 @@ void UnitTest::Folder_CreateFolderAndRemoveFolder_FolderCreatedAndRemoved(std::f
 void UnitTest::Folder_CreateAndRemoveFile_FileCreatedAndRemoved(const std::string& file_name) {
 	ran++;
 	// Arrange
-	Data::Folder folder_class = Data::Folder("data");
+	Data::Folder folder_class = Data::Folder("testdata");
 	folder_class.createFolder();
 	folder_class.removeFile(file_name);
 	// Act p1
 	folder_class.createFile(file_name);
 	// Assert p1
-	if (std::filesystem::exists("data/" + file_name)) {
+	if (std::filesystem::exists("testdata/" + file_name)) {
 		// Act p2
 		folder_class.removeFile(file_name);
 		// Assert p2
-		if (!std::filesystem::exists("data/" + file_name)) {
+		if (!std::filesystem::exists("testdata/" + file_name)) {
 			passed++;
 			std::cout << "Folder_CreateAndRemoveFile_FileCreatedAndRemoved Passed" << std::endl;
 		}
@@ -392,7 +392,7 @@ void UnitTest::Folder_CreateAndRemoveFile_FileCreatedAndRemoved(const std::strin
 void UnitTest::Folder_OpenFile_FileOpened(const std::string& file_name, const std::string& data) {
 	ran++;
 	// Arrange
-	Data::Folder c_folder_class = Data::Folder("data");
+	Data::Folder c_folder_class = Data::Folder("testdata");
 	c_folder_class.createFolder();
 	c_folder_class.createFile(file_name);
 	// Act
@@ -402,7 +402,7 @@ void UnitTest::Folder_OpenFile_FileOpened(const std::string& file_name, const st
 	c_file_class->pop();
 	c_file_class->read();
 	// Assert
-	if (std::filesystem::exists("data/" + file_name) && c_file_class->size() == 1 && (*c_file_class)[0] == data) {
+	if (std::filesystem::exists("testdata/" + file_name) && c_file_class->size() == 1 && (*c_file_class)[0] == data) {
 
 		passed++;
 		std::cout << "Folder_OpenAndCloseFile_FileOpenedAndClosed Passed" << std::endl;
@@ -471,7 +471,7 @@ void UnitTest::Folder_IsEmpty_ReturnsProperValue(std::filesystem::path path) {
 void UnitTest::Folder_GetFilesList_FilesListGot(std::vector<std::string> inner_files) {
 	ran++;
 	// Arrange
-	Data::Folder folder_class = Data::Folder("data");
+	Data::Folder folder_class = Data::Folder("testdata");
 	folder_class.removeFolder();
 	folder_class.createFolder();
 	sort(inner_files.begin(), inner_files.end());
@@ -494,7 +494,7 @@ void UnitTest::Folder_GetFilesList_FilesListGot(std::vector<std::string> inner_f
 void UnitTest::Folder_IsDifferent_CheckIfFilesAreDifferent(std::vector<std::string> inner_files, const std::string& new_file) {
 	ran++;
 	// Arrange
-	Data::Folder folder_class = Data::Folder("data");
+	Data::Folder folder_class = Data::Folder("testdata");
 	folder_class.removeFolder();
 	folder_class.createFolder();
 	for (const std::string& file : inner_files)
@@ -523,7 +523,7 @@ void UnitTest::Folder_IsDifferent_CheckIfFilesAreDifferent(std::vector<std::stri
 void UnitTest::Folder_GetFilesCount_FilesCountGot(std::vector<std::string> inner_files) {
 	ran++;
 	// Arrange
-	Data::Folder folder_class = Data::Folder("data");
+	Data::Folder folder_class = Data::Folder("testdata");
 	folder_class.removeFolder();
 	folder_class.createFolder();
 	for (const std::string& file : inner_files)
@@ -544,7 +544,7 @@ void UnitTest::Folder_GetFilesCount_FilesCountGot(std::vector<std::string> inner
 void UnitTest::Folder_CleanFolder_FolderCleaned(std::vector<std::string> inner_files) {
 	ran++;
 	// Arrange
-	Data::Folder folder_class = Data::Folder("data");
+	Data::Folder folder_class = Data::Folder("testdata");
 	folder_class.removeFolder();
 	folder_class.createFolder();
 	for (const std::string& file : inner_files)
