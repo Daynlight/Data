@@ -9,6 +9,7 @@ git clean -xfd
 rm -rf build/
 rm -rf prodLib/
 rm -rf prodRelease/
+rm -rf .vs/
 
 if [ "$result" == ".github" ]; then
     cd .github
