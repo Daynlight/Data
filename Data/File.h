@@ -6,6 +6,9 @@
 
 #include "Hash.h"
 
+// constants
+const static char SEPERATECHAR = '\a';
+
 namespace Data {
 	/* [INFO]
 	File class is used to

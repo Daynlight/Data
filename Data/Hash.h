@@ -14,6 +14,7 @@ namespace Data {
 		virtual std::string un_hash_function(std::string data) = 0;
 	};
 
+	// [FEATURE] Add hash function for new save system
 	/* [INFO]
 	BaseHash is class that contain 
 	basic hash function it is nothing 
@@ -27,7 +28,7 @@ namespace Data {
 		std::string un_hash_function(std::string data);
 
 	private:
-		const char* hash_key = "ashduia767asd8hsd76a8sdauhdjasd767asd";
+		const char* hash_key = "asd";
 	};
 
 	// [FEATURE] Add more hash functions

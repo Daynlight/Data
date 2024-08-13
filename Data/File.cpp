@@ -62,23 +62,12 @@ namespace Data {
 	};
 
 	void File::save(i_Hash* hash) {
-		std::string line = "", temp = "";
+		std::string temp = "";
+		
+		for (const std::string& el : content)
+			temp += el + SEPERATECHAR;
 
-		for (int count_content = 0; count_content < content.size(); count_content++) {
-			for (const uint8_t& data : content[count_content]) {
-				if (data < 100) line += "0";
-				if (data < 10) line += "0";
-				line += std::to_string(data);
-			};
-
-			if (hash && content[count_content] != "") line = hash->hash_function(line);
-
-			temp += line;
-			line = "";
-
-			if (count_content < content.size() - 1) temp += "\n";
-		};
-		temp += "\0";
+		if(hash != nullptr) temp = hash->hash_function(temp);
 
 		std::fstream file(path_to_file, std::ios::out);
 		file << temp;
@@ -92,56 +81,41 @@ namespace Data {
 		std::string line = "", temp = "";
 
 		while (!file.eof()) {
-			temp = "";
 			std::getline(file, line);
-
-			if (line != "") {
-				if (hash) line = hash->un_hash_function(line);
-				for (size_t count_char = 0; count_char < line.size(); count_char = count_char + 3) {
-					uint8_t line_char = 0;
-					try {
-						line_char = std::stoul(line.substr(count_char, 3));
-					}
-					catch (std::exception e) {
-						line_char = 0;
-					};
-					temp += line_char;
-				};
-				content.emplace_back(temp);
-			};
+			temp += line;
 		};
+
+		if (hash != nullptr) temp = hash->un_hash_function(temp);
+
+		line = "";
+		for (const char& el : temp)
+			if (el == SEPERATECHAR) {
+				content.emplace_back(line);
+				line = "";
+			}
+			else line += el;
+
 		file.close();
 	};
 
 	bool File::isDifferent(i_Hash* hash) {
 		std::fstream file(path_to_file, std::ios::in);
-		std::string line = "", temp = "";
-		size_t count = 0;
+		std::string temp = "", data = "";
 
 		while (!file.eof()) {
-			temp = "";
-			std::getline(file, line);
-
-			if (line != "") {
-				if (hash) line = hash->un_hash_function(line);
-				for (size_t count_char = 0; count_char < line.size(); count_char = count_char + 3) {
-					uint8_t line_char = 0;
-					try {
-						line_char = std::stoul(line.substr(count_char, 3));
-					}
-					catch (std::exception e) {
-						line_char = 0;
-					};
-					temp += line_char;
-				};
-
-				if (count >= content.size()) return true;
-				if (content[count] != temp) return true;
-
-				count++;
-			};
+			std::getline(file, data);
+			temp += data;
 		};
+
+		if (hash != nullptr) temp = hash->un_hash_function(temp);
+
+		data = "";
+		for (const std::string& el : content)
+			data += el + SEPERATECHAR;
+
 		file.close();
+
+		if (data != temp) return true;
 		return false;
 	};
 };
