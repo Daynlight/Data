@@ -7,7 +7,7 @@
 #include "Hash.h"
 
 // constants
-const static char SEPERATECHAR = '\a';
+const static std::string SEPERATE = "SEPERATE";
 
 namespace Data {
 	/* [INFO]

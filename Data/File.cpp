@@ -65,7 +65,7 @@ namespace Data {
 		std::string temp = "";
 		
 		for (const std::string& el : content)
-			temp += el + SEPERATECHAR;
+			temp += el + SEPERATE;
 
 		if(hash != nullptr) temp = hash->hash_function(temp);
 
@@ -88,12 +88,14 @@ namespace Data {
 		if (hash != nullptr) temp = hash->un_hash_function(temp);
 
 		line = "";
-		for (const char& el : temp)
-			if (el == SEPERATECHAR) {
+		for (int index = 0; index < temp.size() - SEPERATE.size() + 1; index++) {
+			std::string find_next_sep = temp.substr(index, SEPERATE.size());
+			if (find_next_sep == SEPERATE) {
 				content.emplace_back(line);
 				line = "";
 			}
-			else line += el;
+			else line += temp[index];
+		};
 
 		file.close();
 	};
@@ -111,7 +113,7 @@ namespace Data {
 
 		data = "";
 		for (const std::string& el : content)
-			data += el + SEPERATECHAR;
+			data += el + SEPERATE;
 
 		file.close();
 
