@@ -21,8 +21,7 @@ namespace Data {
 			hash_string += data[index];
 			hash_string += data[index + 1];
 			hash_string += data[index + 2];
-			int hash_number = std::stoi(hash_string);
-			ret += (char)(hash_number - (int)hash_key[hash_count % (sizeof(hash_key) / 8)] - 100);
+			ret += (char)(std::stoi(hash_string) - (int)hash_key[hash_count % (sizeof(hash_key) / 8)] - 100);
 			hash_count++;
 		};
 		return ret;

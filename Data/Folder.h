@@ -1,22 +1,14 @@
 #pragma once
-// system
 #include <filesystem>
 #include <fstream>
 #include <string>
 #include <vector>
-
 #include "File.h"
 
 namespace Data {
-	/* [INFO]
-	Folder class is used to 
-	manage data inside folder
-	you can add, remove, open files 
-	inside folder */
 	class Folder {
 	public:
-		Folder(const std::filesystem::path& path_to_folder);
-		// methods
+		Folder(const std::filesystem::path& path_to_folder = DEFAULTPATHTOFOLDER);
 		size_t count();
 		bool exist();
 		bool isEmpty();

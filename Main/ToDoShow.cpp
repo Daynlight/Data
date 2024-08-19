@@ -1,82 +1,71 @@
 #include "Show.h"
 
-// [BUG] After incorect password program break saved file and you cant to recover it
+// Save issues
+
+const static inline std::string PASSWORD = "Hello";
+const static inline std::string HASHKEY = "abacs";
+const static inline std::string DEFFOLDER = "showdata";
+const static inline std::string DEFFILE = "to_do_show.txt";
+
 
 void ToDoShow() {
-	// Init
 	bool running = true;
-	Data::Folder c_folder("showdata");
-	if (!c_folder.exist()) c_folder.createFolder();
-	c_folder.fetchFilesList();
-	if (!c_folder.fileExist("to_do_show.txt")) 
-		c_folder.createFile("to_do_show.txt");
-	
-	// Open file
-	std::shared_ptr<Data::File> c_to_do_file = c_folder.openFile("to_do_show.txt");
-
-	// Get Password
-	std::string hash_key = "asdha7676dahsdbnbasd678asdakjhasd";
 	std::string password = "";
+	
 	std::cout << "Password: ";
 	std::cin >> password;
-	for (size_t index = 0; index < password.size(); index++)
-		hash_key[index] = hash_key[index] + password[index];
-	Data::BaseHash c_hash = Data::BaseHash(hash_key.c_str());
 
-	// Check if file exist if not create
-	if (c_to_do_file->isEmpty()) c_to_do_file->createFile();
+	if (password == PASSWORD) {
+		Data::Folder folder(DEFFOLDER);
+		Data::BaseHash hash(HASHKEY.c_str());
+		if (!folder.exist()) folder.createFolder();
 
-	// Load data from file
-	c_to_do_file->read(&c_hash);
+		bool file_exist = false;
+		folder.fetchFilesList();
+		for (std::string& el : folder)
+			if (el == DEFFILE) file_exist = true;
+		if (!file_exist) folder.createFile(DEFFILE);
 
-	// Main app loop
-	while (running) {
-		// Clear terminal
-		system("cls");
-
-		// Show to do list
-		std::cout << "To do: " << std::endl;
-		for (int index = 0; index < c_to_do_file->size(); index++)
-			std::cout << index + 1 << ". " << (*c_to_do_file)[index] << std::endl;
-
-		// Show Menu
-		std::cout << "----------------------\n";
-		std::cout 
-			<< "1. Add\n" 
-			<< "2. Done\n" 
-			<< "3. Remove\n" 
-			<< "4. Exit\n";
-
-		// Get user action
-		int action = 0;
-		std::cout << "Chose Action: ";
-		std::cin >> action;
-
-		// Run user action
-		std::string name = "";
-		int id = 0;
-		switch (action)
-		{
-		case 1: // Add
-			std::cout << "Title: ";
-			std::getline(std::cin >> std::ws, name);
-			c_to_do_file->push(name);
-			break;
-		case 2: // Done
-			std::cout << "Chose id: ";
-			std::cin >> id;
-			if (id <= c_to_do_file->size()) c_to_do_file->remove(id - 1);
-			break;
-		case 3: // Remove
-			std::cout << "Chose id: ";
-			std::cin >> id;
-			if (id <= c_to_do_file->size()) c_to_do_file->remove(id - 1);
-			break;
-		default: // Exit
-			running = false;
+		std::shared_ptr<Data::File> file(folder.openFile(DEFFILE));
+		
+		if (file->isEmpty()) {
+			file->push("Welcome");
+			file->save(&hash);
 		};
 
-		// Save changes in file
-		c_to_do_file->save(&c_hash);
+		while (running) {
+			system("cls");
+			file->read(&hash);
+			uint8_t action = 0;
+			std::string data = "";
+
+			for (uint8_t index = 0; index < file->size(); index++)
+				std::cout << index + 1 << ". " << (*file)[index] << "\n";
+				
+			std::cout << "Chose Action: \n";
+			std::cout << "1. Add\n";
+			std::cout << "2. Remove\n";
+			std::cout << "3. Exit\n";
+			std::cout << "> ";
+			std::cin >> action;
+
+			switch (action) {
+			case '1':
+				std::cout << "> ";
+				std::cin >> data;
+				file->push(data);
+				break;
+			case '2':
+				std::cout << "> ";
+				std::cin >> action;
+				std::cout << file->pop(action) << " removed";
+				break;
+			default:
+				running = false;
+				break;
+			}
+
+			file->save(&hash);
+		};
 	};
 };

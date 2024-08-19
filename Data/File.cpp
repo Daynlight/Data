@@ -63,36 +63,50 @@ namespace Data {
 		return content.end();
 	};
 
-	void File::save(i_Hash* hash) {
+	void File::save(IHash* hash) {
 		std::string temp = "";
-		
+
+#if DATAHASHBYPARTS
 		for (const std::string& el : content)
-			temp += el + SEPERATE;
-
-		if(hash != nullptr) temp = hash->hash_function(temp);
-
+		{
+			if (hash != nullptr) temp += hash->hash_function(std::string(el + DATASEPERATOR));
+			else temp += std::string(el + DATASEPERATOR);
+		};
+#else
+		for (const std::string& el : content)
+			temp += el + DATASEPERATOR;
+		if (hash != nullptr) temp = hash->hash_function(temp);
+#endif
+		
 		std::fstream file(path_to_file, std::ios::out);
 		file << temp;
 		file.close();
 	};
 
-	void File::read(i_Hash* hash) {
+	void File::read(IHash* hash) {
 		content.clear();
 
 		std::fstream file(path_to_file, std::ios::in);
 		std::string line = "", temp = "";
 
+#if DATAHASHBYPARTS
+		while (!file.eof()) {
+			std::getline(file, line);
+			if (hash != nullptr) temp += hash->un_hash_function(line);
+			else temp += line;
+		};
+#else
 		while (!file.eof()) {
 			std::getline(file, line);
 			temp += line;
 		};
-
 		if (hash != nullptr) temp = hash->un_hash_function(temp);
+#endif
 
 		line = "";
-		for (int index = 0; index < temp.size() - SEPERATE.size() + 1; index++) {
-			std::string find_next_sep = temp.substr(index, SEPERATE.size());
-			if (find_next_sep == SEPERATE) {
+		for (int index = 0; index < temp.size() - DATASEPERATOR.size() + 1; index++) {
+			std::string find_next_sep = temp.substr(index, DATASEPERATOR.size());
+			if (find_next_sep == DATASEPERATOR) {
 				content.emplace_back(line);
 				line = "";
 			}
@@ -102,7 +116,7 @@ namespace Data {
 		file.close();
 	};
 
-	bool File::isDifferent(i_Hash* hash) {
+	bool File::isDifferent(IHash* hash) {
 		std::fstream file(path_to_file, std::ios::in);
 		std::string temp = "", data = "";
 
@@ -115,7 +129,7 @@ namespace Data {
 
 		data = "";
 		for (const std::string& el : content)
-			data += el + SEPERATE;
+			data += el + DATASEPERATOR;
 
 		file.close();
 
