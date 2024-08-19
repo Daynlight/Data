@@ -15,7 +15,7 @@ UnitTest::UnitTest() {
 	Folder_CreateAndRemoveFile_FileCreatedAndRemoved("Data4.txt");
 
 	Folder_OpenFile_FileOpened("Data1.txt", "Hello World!!!");
-	Folder_OpenFile_FileOpened("Data2.txt", "Witaj Świecie!!!");
+	Folder_OpenFile_FileOpened("Data2.txt", "Witaj Swiecie!!!");
 	Folder_OpenFile_FileOpened("Data3.txt", "Hallo Welt!!!");
 	Folder_OpenFile_FileOpened("Data4.txt", "Bonjour le monde!!!");
 
@@ -58,14 +58,14 @@ UnitTest::UnitTest() {
 	File_GetSize_SizeReturned(100000);
 
 	File_PushData_DataPushed("Hello World!!!");
-	File_PushData_DataPushed("Witaj Świecie!!!");
+	File_PushData_DataPushed("Witaj Swiecie!!!");
 	File_PushData_DataPushed("Hallo Welt!!!");
 	File_PushData_DataPushed("Bonjour le monde!!!");
 	File_PushData_DataPushed("Hola Mundo!!!");
 	File_PushData_DataPushed("Ciao mondo!!!");
 
 	File_PopData_DataPopped("Hello World!!!");
-	File_PopData_DataPopped("Witaj Świecie!!!");
+	File_PopData_DataPopped("Witaj Swiecie!!!");
 	File_PopData_DataPopped("Hallo Welt!!!");
 	File_PopData_DataPopped("Bonjour le monde!!!");
 	File_PopData_DataPopped("Hola Mundo!!!");
@@ -74,21 +74,21 @@ UnitTest::UnitTest() {
 	File_PopDataAt_DataPoppedAt();
 
 	File_ManageData_DataManaged("Hello", "World");
-	File_ManageData_DataManaged("Witaj", "Świecie");
+	File_ManageData_DataManaged("Witaj", "Swiecie");
 	File_ManageData_DataManaged("Hallo", " Welt");
 	File_ManageData_DataManaged("Bonjour", " le monde");
 	File_ManageData_DataManaged("Hola", "Mundo");
 	File_ManageData_DataManaged("Ciao", "Mondo");
 
 	File_SaveAndRead_DataSavedAndRead("Hello World!!!");
-	File_SaveAndRead_DataSavedAndRead("Witaj Świecie!!!");
+	File_SaveAndRead_DataSavedAndRead("Witaj Swiecie!!!");
 	File_SaveAndRead_DataSavedAndRead("Hallo Welt!!!");
 	File_SaveAndRead_DataSavedAndRead("Bonjour le monde!!!");
 	File_SaveAndRead_DataSavedAndRead("Hola Mundo!!!");
 	File_SaveAndRead_DataSavedAndRead("Ciao mondo!!!");
 
 	File_FileIsDifferent_FileIsDifferentWorks("Hello", "World");
-	File_FileIsDifferent_FileIsDifferentWorks("Witaj", "Świecie");
+	File_FileIsDifferent_FileIsDifferentWorks("Witaj", "Swiecie");
 	File_FileIsDifferent_FileIsDifferentWorks("Hallo", " Welt");
 	File_FileIsDifferent_FileIsDifferentWorks("Bonjour", " le monde");
 	File_FileIsDifferent_FileIsDifferentWorks("Hola", "Mundo");
@@ -100,7 +100,7 @@ UnitTest::UnitTest() {
 	File_CreateAndRemoveFile_FileCreatedAndRemoved("HelloWorld.txt");
 
 	File_HashFile_FileHashed("Hello World!!!");
-	File_HashFile_FileHashed("Witaj Świecie!!!");
+	File_HashFile_FileHashed("Witaj Swiecie!!!");
 	File_HashFile_FileHashed("Hallo Welt!!!");
 	File_HashFile_FileHashed("Bonjour le monde!!!");
 
@@ -317,13 +317,13 @@ void UnitTest::File_HashFile_FileHashed(std::string data)
 	// Arrange
 	Data::File file_class = Data::File("data.txt", 0);
 	file_class.push(data);
-	Data::BaseHash hash = Data::BaseHash("HelloWorld");
-	Data::BaseHash hash1 = Data::BaseHash("HelloWorld!!!");
+	Data::BaseHash hash = Data::BaseHash("a");
+	Data::BaseHash hash1 = Data::BaseHash("b");
 	// Act
 	file_class.save(&hash);
 	file_class.read(&hash1);
 	// Assert part 1
-	if (file_class[0] != data && file_class.size() == 1) {
+	if (file_class[0] != data) {
 		// Act part 2
 		file_class.read(&hash);
 		// Assert part 2

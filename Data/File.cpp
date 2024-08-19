@@ -27,7 +27,9 @@ namespace Data {
 	};
 
 	std::string& File::operator[](const size_t& index) {
-		return content[index];
+		std::shared_ptr<std::string> temp = std::make_shared<std::string>("");
+		if (index < content.size()) return content[index];
+		return *temp;
 	};
 
 	size_t File::size() {
