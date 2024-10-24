@@ -109,6 +109,7 @@ namespace Data {
 			if (find_next_sep == DATASEPERATOR) {
 				content.emplace_back(line);
 				line = "";
+				index += DATASEPERATOR.size() - 1;
 			}
 			else line += temp[index];
 		};

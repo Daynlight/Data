@@ -1,12 +1,9 @@
 #include "Show.h"
 
-// Save issues
-
 const static inline std::string PASSWORD = "Hello";
 const static inline std::string HASHKEY = "abacs";
 const static inline std::string DEFFOLDER = "showdata";
 const static inline std::string DEFFILE = "to_do_show.txt";
-
 
 void ToDoShow() {
 	bool running = true;
