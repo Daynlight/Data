@@ -1,0 +1,4 @@
+[submodule "SQLite"]
+	path = SQLite
+	url = https://github.com/Daynlight/SQLite
+	branch = Lib
