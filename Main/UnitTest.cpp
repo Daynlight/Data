@@ -118,7 +118,7 @@ UnitTest::UnitTest() {
 void UnitTest::File_GetSize_SizeReturned(size_t size) {
 	ran++;
 	// Arrange
-	Data::File file_class = Data::File("data.txt", size);
+	Data::File file_class = Data::File("data.txt", 0);
 	for (size_t i = 0; i < size; i++) {
 		file_class.push("Hello World!!!");
 	}

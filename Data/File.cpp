@@ -4,6 +4,8 @@ namespace Data {
 	File::File(const std::string& path_to_file, size_t size)
 		: path_to_file(path_to_file) {
 		content.reserve(size);
+		if (size) for (int i = 0; i < size; i++) 
+			content.emplace_back(std::to_string(0));
 	};
 
 	void File::push(const std::string& data) {
