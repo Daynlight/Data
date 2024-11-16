@@ -1,0 +1,38 @@
+[
+{
+  "directory": "D:/Data/build",
+  "command": "C:\\msys64\\mingw64\\bin\\g++.exe   -g -std=gnu++20 -o CMakeFiles\\Data.dir\\Data\\File.cpp.obj -c D:\\Data\\Data\\File.cpp",
+  "file": "D:/Data/Data/File.cpp",
+  "output": "CMakeFiles/Data.dir/Data/File.cpp.obj"
+},
+{
+  "directory": "D:/Data/build",
+  "command": "C:\\msys64\\mingw64\\bin\\g++.exe   -g -std=gnu++20 -o CMakeFiles\\Data.dir\\Data\\Folder.cpp.obj -c D:\\Data\\Data\\Folder.cpp",
+  "file": "D:/Data/Data/Folder.cpp",
+  "output": "CMakeFiles/Data.dir/Data/Folder.cpp.obj"
+},
+{
+  "directory": "D:/Data/build",
+  "command": "C:\\msys64\\mingw64\\bin\\g++.exe   -g -std=gnu++20 -o CMakeFiles\\Data.dir\\Data\\Hash.cpp.obj -c D:\\Data\\Data\\Hash.cpp",
+  "file": "D:/Data/Data/Hash.cpp",
+  "output": "CMakeFiles/Data.dir/Data/Hash.cpp.obj"
+},
+{
+  "directory": "D:/Data/build",
+  "command": "C:\\msys64\\mingw64\\bin\\g++.exe   -g -std=gnu++20 -o CMakeFiles\\Main.dir\\Main\\Main.cpp.obj -c D:\\Data\\Main\\Main.cpp",
+  "file": "D:/Data/Main/Main.cpp",
+  "output": "CMakeFiles/Main.dir/Main/Main.cpp.obj"
+},
+{
+  "directory": "D:/Data/build",
+  "command": "C:\\msys64\\mingw64\\bin\\g++.exe   -g -std=gnu++20 -o CMakeFiles\\Main.dir\\Main\\ToDoShow.cpp.obj -c D:\\Data\\Main\\ToDoShow.cpp",
+  "file": "D:/Data/Main/ToDoShow.cpp",
+  "output": "CMakeFiles/Main.dir/Main/ToDoShow.cpp.obj"
+},
+{
+  "directory": "D:/Data/build",
+  "command": "C:\\msys64\\mingw64\\bin\\g++.exe   -g -std=gnu++20 -o CMakeFiles\\Main.dir\\Main\\UnitTest.cpp.obj -c D:\\Data\\Main\\UnitTest.cpp",
+  "file": "D:/Data/Main/UnitTest.cpp",
+  "output": "CMakeFiles/Main.dir/Main/UnitTest.cpp.obj"
+}
+]
