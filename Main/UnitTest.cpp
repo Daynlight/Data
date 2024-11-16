@@ -474,13 +474,13 @@ void UnitTest::Folder_GetFilesList_FilesListGot(std::vector<std::string> inner_f
 	Data::Folder folder_class = Data::Folder("testdata");
 	folder_class.removeFolder();
 	folder_class.createFolder();
-	sort(inner_files.begin(), inner_files.end());
+	std::sort(inner_files.begin(), inner_files.end());
 	for (const std::string& file : inner_files)
 		folder_class.createFile(file);
 	// Act
 	folder_class.fetchFilesList();
 	std::vector<std::string> files = folder_class.filesList();
-	sort(files.begin(), files.end());
+	std::sort(files.begin(), files.end());
 	// Assert
 	if (files.size() == inner_files.size() && files == inner_files) {
 		passed++;

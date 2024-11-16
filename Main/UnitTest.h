@@ -1,6 +1,6 @@
 #pragma once
 #include "../Data/Data.h"
-
+#include <algorithm>
 #include <iostream>
 #include <filesystem>
 #include <thread>
