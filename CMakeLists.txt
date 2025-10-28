@@ -1,3 +1,4 @@
+cmake_minimum_required(VERSION 3.15)
 file(GLOB_RECURSE cpp_data_files 
     "Data/*.cpp" 
     "Data/*.h")
@@ -10,7 +11,6 @@ file(GLOB_RECURSE mysqlcpp_lib_flies
     "vendor/lib/mysqlcppconn-static"
     "vendor/lib/mysqlcppconnx-static")
 
-cmake_minimum_required(VERSION 3.0)
 
 # [Data]
 project(Data VERSION 1.0 LANGUAGES CXX)
